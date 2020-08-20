@@ -29,5 +29,8 @@ public class StudentController {
         String s= "11111";
         String[] split = s.split("\\.");
         System.out.println(split[0]);
+        String s1= "11111";
+        String[] split1 = s.split("\\.");
+        System.out.println(split[0]);
     }
 }
