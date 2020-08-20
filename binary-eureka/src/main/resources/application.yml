@@ -1,0 +1,12 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: binary-eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    prefer-ip-address: true #显示ip
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #从spring获取ip
