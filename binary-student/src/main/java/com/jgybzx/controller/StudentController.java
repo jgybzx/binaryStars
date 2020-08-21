@@ -34,9 +34,9 @@ public class StudentController {
         String[] split3 = split1[split1.length - 1].split("\\.");
         System.out.println("1");
 
-        System.out.println("2");
-        System.out.println("2");
-        System.out.println("2");
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
 
 
     }
