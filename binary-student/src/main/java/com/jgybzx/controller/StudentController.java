@@ -26,11 +26,18 @@ public class StudentController {
     }
 
     public static void main(String[] args) {
-        String s= "11111";
-        String[] split = s.split("\\.");
-        System.out.println(split[0]);
-        String s1= "11111";
-        String[] split1 = s.split("\\.");
-        System.out.println(split[0]);
+        String s = "http://10.30.87.54/ns3-propose-make";
+        String s1 = "http://10.30.77.110.8090";
+        String[] split = s.split("/");
+        String[] split1 = s1.split("/");
+        String[] split2 = split[split.length - 1].split("\\.");
+        String[] split3 = split1[split1.length - 1].split("\\.");
+        System.out.println("1");
+
+        System.out.println("1");
+        System.out.println("1");
+        System.out.println("1");
+
+
     }
 }
