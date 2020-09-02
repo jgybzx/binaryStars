@@ -5,6 +5,7 @@ spring:
     name: binary-eureka
 eureka:
   client:
+    registerWithEureka: false
     service-url:
       defaultZone: http://localhost:10086/eureka
   instance:

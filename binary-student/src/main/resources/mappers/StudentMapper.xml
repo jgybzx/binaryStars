@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jgybzx.mappers.StudentMapper">
+
+    <resultMap id="userResultMap" type="com.jgybzx.model.Student">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="sex" property="sex"></result>
+        <result column="department" property="department"></result>
+        <result column="address" property="address"></result>
+        <result column="birthday" property="birthday"></result>
+    </resultMap>
+    <select id="queryAll" resultMap="userResultMap">
+        select * from student;
+    </select>
+
+
+</mapper>

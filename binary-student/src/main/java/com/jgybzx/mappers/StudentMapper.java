@@ -1,0 +1,21 @@
+package com.jgybzx.mappers;
+
+import com.jgybzx.model.Student;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
+
+/**
+ * @author jgybzx
+ * @date 2020/9/2 9:58
+ * @description
+ */
+@Component
+public interface StudentMapper {
+    /**
+     * 查询全部
+     * @return
+     */
+    List<Student> queryAll();
+}
