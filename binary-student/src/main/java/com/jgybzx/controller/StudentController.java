@@ -6,9 +6,7 @@ import com.jgybzx.model.Student;
 import com.jgybzx.service.StudentService;
 import com.jgybzx.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class StudentController {
     @Autowired
     private StudentServiceImpl studentService;
 
-    @PostMapping("queryAll")
+    @GetMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();
         return JsonUtil.toJson(studentList);

@@ -1,0 +1,14 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: binary-remote
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #从spring获取ip
+
