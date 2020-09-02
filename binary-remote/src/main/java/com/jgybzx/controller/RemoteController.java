@@ -1,12 +1,10 @@
 package com.jgybzx.controller;
 
 import com.jgybzx.service.RemoteService;
-import com.jgybzx.service.impl.RemoteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,6 +38,5 @@ public class RemoteController {
         date.setTime(milliSecond);
         System.err.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(date));
     }
-
 
 }
