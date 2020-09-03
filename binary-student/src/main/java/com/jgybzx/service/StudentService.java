@@ -1,6 +1,7 @@
 package com.jgybzx.service;
 
 import com.jgybzx.model.Student;
+import com.jgybzx.model.StudentDto;
 
 import java.util.List;
 
@@ -15,4 +16,12 @@ public interface StudentService {
      * @return
      */
     List<Student> queryAll();
+
+
+    /**
+     * 根据条件查询数据，动态参数
+     * @param studentDto
+     * @return
+     */
+    List<Student> queryByCondition(StudentDto studentDto);
 }

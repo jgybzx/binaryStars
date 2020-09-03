@@ -1,6 +1,7 @@
 package com.jgybzx.mappers;
 
 import com.jgybzx.model.Student;
+import com.jgybzx.model.StudentDto;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
@@ -18,4 +19,11 @@ public interface StudentMapper {
      * @return
      */
     List<Student> queryAll();
+
+    /**
+     * 根据条件查询  动态参数
+     * @param studentDto
+     * @return
+     */
+    List<Student> queryByCondition(StudentDto studentDto);
 }

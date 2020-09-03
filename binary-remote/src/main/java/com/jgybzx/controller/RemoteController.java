@@ -3,11 +3,13 @@ package com.jgybzx.controller;
 import com.jgybzx.service.RemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * @author jgybzx
@@ -25,6 +27,11 @@ public class RemoteController {
     public String queryAll() {
         String result = remoteService.queryAll();
         return result;
+    }
+
+    @PostMapping("queryByCondition")
+    public String queryByCondition(@RequestBody Map<String, Object> map) {
+        return remoteService.queryByCondition(map);
     }
 
     @PostMapping("test")

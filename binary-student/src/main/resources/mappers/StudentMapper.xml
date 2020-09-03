@@ -12,8 +12,33 @@
         <result column="address" property="address"></result>
         <result column="birthday" property="birthday"></result>
     </resultMap>
+    <!--List<Student> queryAll();-->
     <select id="queryAll" resultMap="userResultMap">
         select * from student;
+    </select>
+    <!--List<Student> queryByCondition(StudentDto studentDto);-->
+    <select id="queryByCondition" parameterType="com.jgybzx.model.StudentDto" resultMap="userResultMap">
+        select * from student
+        <where>
+            <if test="id != null and id !=''">
+                and id = #{id}
+            </if>
+            <if test="name != null and name !=''">
+                and name = #{name}
+            </if>
+            <if test="sex != null and sex !=''">
+                and sex = #{sex}
+            </if>
+            <if test="department != null and department !=''">
+                and department = #{department}
+            </if>
+            <if test="address != null and address !=''">
+                and address = #{address}
+            </if>
+            <if test="birthday != null and birthday !=''">
+                and birthday = #{birthday}
+            </if>
+        </where>
     </select>
 
 

@@ -2,6 +2,7 @@ package com.jgybzx.service.impl;
 
 import com.jgybzx.mappers.StudentMapper;
 import com.jgybzx.model.Student;
+import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,5 +22,10 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> queryAll() {
         return mapper.queryAll();
+    }
+
+    @Override
+    public List<Student> queryByCondition(StudentDto studentDto) {
+        return mapper.queryByCondition(studentDto);
     }
 }

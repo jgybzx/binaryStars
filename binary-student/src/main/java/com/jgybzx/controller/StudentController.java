@@ -3,12 +3,14 @@ package com.jgybzx.controller;
 import com.jgybzx.JsonUtil;
 import com.jgybzx.mappers.StudentMapper;
 import com.jgybzx.model.Student;
+import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.StudentService;
 import com.jgybzx.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author jgybzx
@@ -20,12 +22,29 @@ import java.util.List;
 public class StudentController {
 
     @Autowired
-    private StudentServiceImpl studentService;
+    private StudentService studentService;
 
-    @GetMapping("queryAll")
+    @PostMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();
         return JsonUtil.toJson(studentList);
+    }
+
+    @PostMapping("queryByCondition")
+    public String queryByCondition(@RequestBody Map<String,Object> map) {
+        StudentDto studentDto = JsonUtil.mapToClass(map, StudentDto.class);
+        List<Student> studentList = studentService.queryByCondition(studentDto);
+        return JsonUtil.toJson(studentList);
+        /**
+         * {
+         *   "id": "901",
+         *   "name": "张老大",
+         *   "sex": "男",
+         *   "department": "计算机系",
+         *   "address": "北京市海淀区",
+         *   "birthday": "1995-05-13 00:00:00"
+         * }
+         */
     }
 
     @PostMapping("test")

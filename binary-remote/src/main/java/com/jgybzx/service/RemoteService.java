@@ -1,5 +1,7 @@
 package com.jgybzx.service;
 
+import java.util.Map;
+
 /**
  * @author jgybzx
  * @date 2020/9/2 11:18
@@ -11,4 +13,11 @@ public interface RemoteService {
      * @return
      */
     String queryAll();
+
+    /**
+     * Feign 远程调用
+     * @param map
+     * @return
+     */
+    String queryByCondition(Map<String, Object> map);
 }
