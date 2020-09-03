@@ -3,7 +3,10 @@ server:
 spring:
   application:
     name: binary-remote
-
+  #配置项目热部署 spring.devtools.restart.enabled=true
+  devtools:
+    restart:
+      enabled: true
 eureka:
   client:
     service-url:
@@ -11,4 +14,12 @@ eureka:
   instance:
     prefer-ip-address: true
     instance-id: ${spring.cloud.client.ip-address}:${server.port} #从spring获取ip
+
+#Feign内置Ribbon 配置，默认轮询
+user-server:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机
+feign:
+  hystrix:
+    enabled: true # 开启Feign的降级功能，而feign内置的熔断功能是自动
 

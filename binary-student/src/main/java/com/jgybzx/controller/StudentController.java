@@ -33,6 +33,12 @@ public class StudentController {
     @PostMapping("queryByCondition")
     public String queryByCondition(@RequestBody Map<String,Object> map) {
         StudentDto studentDto = JsonUtil.mapToClass(map, StudentDto.class);
+//        try {
+//            // 模拟服务器异常，访问超时
+//            Thread.sleep(2000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
         List<Student> studentList = studentService.queryByCondition(studentDto);
         return JsonUtil.toJson(studentList);
         /**

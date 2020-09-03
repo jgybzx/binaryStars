@@ -1,5 +1,6 @@
 server:
   port: 8081
+
 spring:
   application:
     name: binary-student
@@ -8,6 +9,10 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
+  #配置项目热部署 spring.devtools.restart.enabled=true
+  devtools:
+    restart:
+      enabled: true
 eureka:
   client:
     service-url:

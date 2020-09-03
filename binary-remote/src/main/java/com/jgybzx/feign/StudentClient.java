@@ -11,7 +11,7 @@ import java.util.Map;
  * @date 2020/9/3 14:48
  * @description
  */
-@FeignClient(value = "binary-student")
+@FeignClient(value = "binary-student",fallback = StudentClientFallback.class)
 public interface StudentClient {
     /**
      * 远程调用，根据入参条件查询数据
