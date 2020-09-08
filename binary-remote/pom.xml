@@ -56,6 +56,17 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.jgybzx</groupId>
+            <artifactId>MyJsonUtil</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
     </dependencies>
     <!--热部署插件-->
     <build>

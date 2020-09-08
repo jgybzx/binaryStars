@@ -1,5 +1,7 @@
 package com.jgybzx.controller;
 
+import com.jgybzx.JsonUtil;
+import com.jgybzx.config.ProductConfig;
 import com.jgybzx.service.RemoteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author jgybzx
@@ -22,6 +23,8 @@ public class RemoteController {
 
     @Autowired
     private RemoteService remoteService;
+    @Autowired
+    private ProductConfig productConfig;
 
     @PostMapping("queryAll")
     public String queryAll() {
@@ -39,11 +42,13 @@ public class RemoteController {
         return "success";
     }
 
-    public static void main(String[] args) {
-        long milliSecond = 1598265096L;
-        Date date = new Date();
-        date.setTime(milliSecond);
-        System.err.println(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(date));
+    @PostMapping("config")
+    public String productList() {
+        List<String> productNo = productConfig.getProductNo();
+        for (Iterator<String> iterator = productNo.iterator(); iterator.hasNext(); ) {
+            String next = iterator.next();
+            System.err.println(next);
+        }
+        return JsonUtil.toJson(productNo);
     }
-
 }
