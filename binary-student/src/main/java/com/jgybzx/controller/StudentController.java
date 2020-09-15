@@ -8,7 +8,9 @@ import com.jgybzx.service.StudentService;
 import com.jgybzx.service.impl.StudentServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +33,7 @@ public class StudentController {
     }
 
     @PostMapping("queryByCondition")
-    public String queryByCondition(@RequestBody Map<String,Object> map) {
+    public String queryByCondition(@RequestBody Map<String, Object> map) {
         StudentDto studentDto = JsonUtil.mapToClass(map, StudentDto.class);
 //        try {
 //            // 模拟服务器异常，访问超时
@@ -51,6 +53,13 @@ public class StudentController {
          *   "birthday": "1995-05-13 00:00:00"
          * }
          */
+    }
+
+    @PostMapping("import")
+    public String importData(@RequestParam("file") MultipartFile file) throws IOException {
+//        String originalFilename = file.getOriginalFilename();
+        String rows = studentService.importFile(file);
+        return rows;
     }
 
     @PostMapping("test")

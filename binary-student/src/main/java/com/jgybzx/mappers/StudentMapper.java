@@ -26,4 +26,11 @@ public interface StudentMapper {
      * @return
      */
     List<Student> queryByCondition(StudentDto studentDto);
+
+    /**
+     * 保存全部
+     * @param studentList
+     * @return
+     */
+    int saveAll(List<Student> studentList);
 }

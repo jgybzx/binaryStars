@@ -12,6 +12,17 @@
         <result column="address" property="address"></result>
         <result column="birthday" property="birthday"></result>
     </resultMap>
+    <!--int saveAll(List<Student> studentList);    -->
+    <insert id="saveAll" parameterType="java.util.List">
+        insert into student (id,name,sex,department,address,birthday)
+        values
+        <foreach collection="list" item="student" index="index" separator=",">
+            (
+            #{student.id}, #{student.name}, #{student.sex}, #{student.department},
+            #{student.address},#{student.birthday}
+            )
+        </foreach>
+    </insert>
     <!--List<Student> queryAll();-->
     <select id="queryAll" resultMap="userResultMap">
         select * from student;

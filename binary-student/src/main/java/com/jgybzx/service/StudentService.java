@@ -2,7 +2,9 @@ package com.jgybzx.service;
 
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,4 +26,11 @@ public interface StudentService {
      * @return
      */
     List<Student> queryByCondition(StudentDto studentDto);
+
+    /**
+     * 读取表格数据 保存到表
+     * @param file
+     * @return
+     */
+    String importFile(MultipartFile file) throws IOException;
 }

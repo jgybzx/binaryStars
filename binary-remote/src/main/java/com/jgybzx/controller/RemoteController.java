@@ -3,14 +3,15 @@ package com.jgybzx.controller;
 import com.jgybzx.JsonUtil;
 import com.jgybzx.config.ProductConfig;
 import com.jgybzx.service.RemoteService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author jgybzx
@@ -50,5 +51,21 @@ public class RemoteController {
             System.err.println(next);
         }
         return JsonUtil.toJson(productNo);
+    }
+
+    public static void main(String[] args) {
+        StudentA student1 = new StudentA("AA", "A");
+        StudentA student2 = new StudentA("AA", "A");
+        StudentA student3 = new StudentA("AA", "A");
+        List<StudentA> studentAList = new ArrayList<>();
+        studentAList.add(student1);
+        studentAList.add(student2);
+        studentAList.add(student3);
+        List<studentD> list = new ArrayList<>();
+        list = studentAList.stream().map(e -> JsonUtil.jsonToClass(JsonUtil.toJson(e), studentD.class)).collect(Collectors.toList());
+        BeanUtils.copyProperties(studentAList, list);
+        for (studentD studentD : list) {
+            System.out.println(studentD);
+        }
     }
 }
