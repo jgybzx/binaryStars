@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public interface RemoteService {
     /**
-     *
+     * 查询全部
      * @return
      */
     String queryAll();

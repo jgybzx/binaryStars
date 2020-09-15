@@ -33,6 +33,7 @@ public class RemoteServiceImpl implements RemoteService {
         Object parm = "";
         String result1 = null;
         String result2 = null;
+        String result3 = null;
         try {
             result1 = restTemplate.postForObject("http://localhost:8081/student/queryAll", parm, String.class);
             // 通过discoveryClient在eureka获取微服务的ip进行调用
@@ -46,10 +47,9 @@ public class RemoteServiceImpl implements RemoteService {
             //通过Ribbon的负载均衡，自动获取微服务集群中的 一个服务进行调用
             //当加上@LoadBalanced时,url地址只能使用服务名字，要不然会抛出异常
             String url1 = "http://binary-student/student/queryAll";
-            String result3 = restTemplate.postForObject(url1, parm, String.class);
-            return result2 + result1 + result3;
+            result3 = restTemplate.postForObject(url1, parm, String.class);
         }
-
+        return result2 + result1 + result3;
     }
 
     @Override

@@ -11,9 +11,12 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  * @description
  */
 @SpringBootApplication
-//@EnableEurekaClient
+
 @MapperScan("com.jgybzx.mappers")
 public class StuApplication {
+    /**
+     * @EnableEurekaClient
+     */
     public static void main(String[] args) {
         SpringApplication.run(StuApplication.class, args);
     }

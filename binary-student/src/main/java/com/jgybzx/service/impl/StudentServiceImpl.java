@@ -80,7 +80,7 @@ public class StudentServiceImpl implements StudentService {
             if (row == null) {
                 continue;
             }
-            Map<String, Object> rowList = new HashMap<>();
+            Map<String, Object> rowList = new HashMap<>(16);
             for (int j = 0; j < totalCells; j++) {
                 Cell cell = row.getCell(j);
                 String cellValue = "";
