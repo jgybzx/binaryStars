@@ -23,8 +23,6 @@ public class FileUploadController {
 
     @PostMapping("fileUpload")
     public String fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
-        System.err.println("==================");
-        System.err.println("==================");
         return fileUpload.fileUpload(file);
     }
 }

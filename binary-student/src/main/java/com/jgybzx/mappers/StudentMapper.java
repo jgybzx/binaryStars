@@ -2,7 +2,6 @@ package com.jgybzx.mappers;
 
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

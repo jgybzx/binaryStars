@@ -3,7 +3,6 @@ package com.jgybzx.controller;
 import com.jgybzx.JsonUtil;
 import com.jgybzx.config.ProductConfig;
 import com.jgybzx.service.RemoteService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author jgybzx
@@ -29,8 +27,7 @@ public class RemoteController {
 
     @PostMapping("queryAll")
     public String queryAll() {
-        String result = remoteService.queryAll();
-        return result;
+        return remoteService.queryAll();
     }
 
     @PostMapping("queryByCondition")
@@ -39,14 +36,9 @@ public class RemoteController {
     }
 
 
-
     @PostMapping("config")
     public String productList() {
         List<String> productNo = productConfig.getProductNo();
-        for (Iterator<String> iterator = productNo.iterator(); iterator.hasNext(); ) {
-            String next = iterator.next();
-            System.err.println(next);
-        }
         return JsonUtil.toJson(productNo);
     }
 
