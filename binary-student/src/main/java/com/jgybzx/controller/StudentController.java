@@ -1,11 +1,13 @@
 package com.jgybzx.controller;
 
 import com.jgybzx.JsonUtil;
+import com.jgybzx.aspect.LogAnnotation;
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.StudentService;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,9 +32,12 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    //@LogAnnotation
     @PostMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();
+        // int i = 1 / 0;
+        studentList = studentList.stream().sorted(Comparator.comparing(Student::getBirthday)).collect(Collectors.toList());
         return JsonUtil.toJson(studentList);
     }
 
@@ -63,6 +68,11 @@ public class StudentController {
     @PostMapping("import")
     public String importData(@RequestParam("file") MultipartFile file) {
         return studentService.importFile(file);
+    }
+
+    @PostMapping("thread")
+    public String thread() {
+        return studentService.thread();
     }
 
     @PostMapping("paintingForm")

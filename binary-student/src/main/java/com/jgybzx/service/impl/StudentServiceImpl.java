@@ -5,6 +5,7 @@ import com.jgybzx.mappers.StudentMapper;
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.StudentService;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -12,15 +13,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author jgybzx
@@ -28,9 +27,10 @@ import java.util.Map;
  * @description
  */
 @Service
-public class StudentServiceImpl implements StudentService {
+public class StudentServiceImpl implements StudentService,Runnable {
     @Autowired
     private StudentMapper mapper;
+
 
     @Override
     public List<Student> queryAll() {
@@ -57,6 +57,7 @@ public class StudentServiceImpl implements StudentService {
         int rows = mapper.saveAll(studentList);
         return String.valueOf(rows);
     }
+
 
     private List<Map<String, Object>> getDataList(MultipartFile file) throws IOException {
 
@@ -122,5 +123,23 @@ public class StudentServiceImpl implements StudentService {
             dataList.add(rowList);
         }
         return dataList;
+    }
+
+    @Autowired
+    private ThreadPoolTaskExecutor taskExecutor;
+    @Override
+    public String thread() {
+        taskExecutor.execute(this);
+        return "执行完成非线程";
+    }
+
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("执行完成");
     }
 }

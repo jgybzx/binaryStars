@@ -2,6 +2,7 @@ package com.jgybzx.mappers;
 
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,5 +32,5 @@ public interface StudentMapper {
      * @param studentList
      * @return
      */
-    int saveAll(List<Student> studentList);
+    int saveAll(@Param("list") List<Student> studentList);
 }

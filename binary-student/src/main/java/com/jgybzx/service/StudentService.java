@@ -32,4 +32,7 @@ public interface StudentService {
      * @return
      */
     String importFile(MultipartFile file) ;
+
+    String thread();
+
 }
