@@ -70,84 +70,10 @@ public class StudentController {
         return studentService.importFile(file);
     }
 
-    @PostMapping("thread")
-    public String thread() {
-        return studentService.thread();
-    }
-
-    @PostMapping("paintingForm")
-    public String paintingForm() {
-        List<Map<String, Object>> maps = JsonUtil.jsonToListMap(JsonUtil.toJson(studentService.queryAll()));
-        List<List<Object>> objects = new ArrayList<>();
-        // 获取表头
-
-        objects.add(new ArrayList<>(maps.get(0).keySet()));
-        for (Map<String, Object> map : maps) {
-            objects.add(map.values().stream().collect(Collectors.toList()));
-        }
-        draw();
-        return JsonUtil.toJson(objects);
-    }
-
-    public void draw() {
-        // 字体大小
-        int fontTitileSize = 15;
-        // 横线的行数
-        //int totalrow = cellsValue.length+1;
-        int totalrow = 7 + 1;
-        // 竖线的行数
-        int totalcol = 8;
-        //if (cellsValue[0] != null) {
-        //    totalcol = cellsValue[0].length;
-        //}
-        // 图片宽度
-        int imageWidth = 1024;
-        // 行高
-        int rowheight = 40;
-        // 图片高度
-        int imageHeight = totalrow * rowheight + 50;
-        // 起始高度
-        int startHeight = 10;
-        // 起始宽度
-        int startWidth = 10;
-        // 单元格宽度
-        int colwidth = (int) ((imageWidth - 20) / totalcol);
-        BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
-        Graphics graphics = image.getGraphics();
-        graphics.setColor(Color.WHITE);
-        graphics.fillRect(0, 0, imageWidth, imageHeight);
-        graphics.setColor(new Color(220, 240, 240));
-
-        //画横线
-        for (int j = 0; j < totalrow; j++) {
-            graphics.setColor(Color.black);
-            graphics.drawLine(startWidth, startHeight + (j + 1) * rowheight, startWidth + colwidth * totalcol, startHeight + (j + 1) * rowheight);
-        }
-        //画竖线
-        for (int k = 0; k < totalcol + 1; k++) {
-            graphics.setColor(Color.black);
-            graphics.drawLine(startWidth + k * colwidth, startHeight + rowheight, startWidth + k * colwidth, startHeight + rowheight * totalrow);
-        }
-        //设置字体
-        Font font = new Font("微软雅黑", Font.BOLD, fontTitileSize);
-        graphics.setFont(font);
-        //写标题
-        String title = "【指标完成进度】";
-        graphics.drawString(title, startWidth, startHeight + rowheight - 10);
-        // 保存图片
-        createImage(image, "D:/test.jpg");
-    }
-
-    public void createImage(BufferedImage image, String fileLocation) {
-        try {
-            FileOutputStream fos = new FileOutputStream(fileLocation);
-            BufferedOutputStream bos = new BufferedOutputStream(fos);
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(bos);
-            encoder.encode(image);
-            bos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    @PostMapping("testTransaction")
+    public String testTransaction(){
+        studentService.testTransaction();
+        return "完成";
     }
 }
 

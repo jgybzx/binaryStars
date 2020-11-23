@@ -33,6 +33,10 @@ public interface StudentService {
      */
     String importFile(MultipartFile file) ;
 
-    String thread();
+
+    /**
+     * 事务控制测试
+     */
+    void testTransaction();
 
 }

@@ -15,6 +15,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -27,7 +28,7 @@ import java.util.*;
  * @description
  */
 @Service
-public class StudentServiceImpl implements StudentService,Runnable {
+public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper mapper;
 
@@ -43,6 +44,7 @@ public class StudentServiceImpl implements StudentService,Runnable {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String importFile(MultipartFile file) {
         if (file.isEmpty()) {
             return "文件不为空";
@@ -56,6 +58,20 @@ public class StudentServiceImpl implements StudentService,Runnable {
         List<Student> studentList = JsonUtil.mapToListObj(dataList, Student.class);
         int rows = mapper.saveAll(studentList);
         return String.valueOf(rows);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void testTransaction() {
+        List<Student> list = new ArrayList<>();
+        Student student = new Student("2222", "1212", "1212", "1212", "1212", new Date());
+        list.add(student);
+        mapper.saveAll(list);
+        //int i = 1 / 0;
+        list.clear();
+        Student student1 = new Student("3333", "1212", "1212", "1212", "1212", new Date());
+        list.add(student1);
+        mapper.saveAll(list);
     }
 
 
@@ -125,21 +141,5 @@ public class StudentServiceImpl implements StudentService,Runnable {
         return dataList;
     }
 
-    @Autowired
-    private ThreadPoolTaskExecutor taskExecutor;
-    @Override
-    public String thread() {
-        taskExecutor.execute(this);
-        return "执行完成非线程";
-    }
 
-    @Override
-    public void run() {
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println("执行完成");
-    }
 }
