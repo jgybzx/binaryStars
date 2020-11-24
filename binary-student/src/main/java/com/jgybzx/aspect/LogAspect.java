@@ -28,12 +28,13 @@ public class LogAspect {
 
     /**
      * 切点 扫描整个mapper
+     *
      * @Pointcut("execution(* com.jgybzx.controller.*.*(..)) && @annotation(com.jgybzx.aspect.LogAnnotation)")
      * @Pointcut("execution(* com.jgybzx.mappers.*.*(..))")
      */
     @Pointcut("execution(* com.jgybzx.mappers.*.*(..)) && !execution(* com.jgybzx.mappers.LogSqlMapper.*(..))")
     public void logRecord() {
-        // 定义切入点
+        // 定义
     }
 
     /**
@@ -88,14 +89,9 @@ public class LogAspect {
     private LogSqlMapper logSqlMapper;
 
     @Around(value = "logRecord()")
-    public Object arount(ProceedingJoinPoint pjp) throws Throwable {
+    public Object around(ProceedingJoinPoint pjp) throws Throwable {
         // 获取请求信息
-        ServletRequestAttributes requestAttributes = null;
-        try {
-            requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();
         Signature signature = pjp.getSignature();
         String logId = String.valueOf(System.currentTimeMillis());
