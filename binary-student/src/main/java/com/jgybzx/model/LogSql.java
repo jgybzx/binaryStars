@@ -8,8 +8,6 @@ import java.util.Date;
  * @description
  */
 public class LogSql {
-    public LogSql() {
-    }
 
     private String logId;
     private String methodName;

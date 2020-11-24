@@ -1,10 +1,7 @@
 package com.jgybzx.aspect;
 
 import com.jgybzx.mappers.LogSqlMapper;
-import com.jgybzx.model.LogSql;
-import com.jgybzx.utils.JdbcUtils;
 import com.jgybzx.utils.SqlUtils;
-import com.netflix.discovery.converters.Auto;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -16,13 +13,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.*;
 
 /**
@@ -37,12 +28,12 @@ public class LogAspect {
 
     /**
      * 切点 扫描整个mapper
+     * @Pointcut("execution(* com.jgybzx.controller.*.*(..)) && @annotation(com.jgybzx.aspect.LogAnnotation)")
+     * @Pointcut("execution(* com.jgybzx.mappers.*.*(..))")
      */
-    //@Pointcut("execution(* com.jgybzx.controller.*.*(..)) && @annotation(com.jgybzx.aspect.LogAnnotation)")
-    //@Pointcut("execution(* com.jgybzx.mappers.*.*(..))")
     @Pointcut("execution(* com.jgybzx.mappers.*.*(..)) && !execution(* com.jgybzx.mappers.LogSqlMapper.*(..))")
     public void logRecord() {
-        // 定义切入点，
+        // 定义切入点
     }
 
     /**
@@ -99,10 +90,14 @@ public class LogAspect {
     @Around(value = "logRecord()")
     public Object arount(ProceedingJoinPoint pjp) throws Throwable {
         // 获取请求信息
-        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        ServletRequestAttributes requestAttributes = null;
+        try {
+            requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         HttpServletRequest request = requestAttributes.getRequest();
         Signature signature = pjp.getSignature();
-        // String logId = UUID.randomUUID().toString().replaceAll("-", "");
         String logId = String.valueOf(System.currentTimeMillis());
         String methodName = signature.getName();
         String methodUrl = signature.toShortString();
@@ -133,12 +128,12 @@ public class LogAspect {
         //</editor-fold>*/
 
         //<editor-fold desc="3、mybatis 通过 map方式保存">
-        Map<String,String> map = new HashMap<>(16);
-        map.put("log_id",logId);
-        map.put("sql_str",sql);
-        map.put("method_name",methodName);
-        map.put("method_url",methodUrl);
-        map.put("request_url",requestUrl);
+        Map<String, String> map = new HashMap<>(16);
+        map.put("log_id", logId);
+        map.put("sql_str", sql);
+        map.put("method_name", methodName);
+        map.put("method_url", methodUrl);
+        map.put("request_url", requestUrl);
         logSqlMapper.saveLogByMap(map);
         //</editor-fold>
         return pjp.proceed();

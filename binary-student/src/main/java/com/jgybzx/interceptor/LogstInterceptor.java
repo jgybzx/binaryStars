@@ -1,6 +1,5 @@
 package com.jgybzx.interceptor;
 
-import org.springframework.util.DigestUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,12 +12,12 @@ import javax.servlet.http.HttpServletResponse;
  * @description
  */
 public class LogstInterceptor implements HandlerInterceptor {
-    private static final ThreadLocal<Object> threadLocal = new ThreadLocal<Object>();
+    private static final ThreadLocal<Object> THREADLOCAL = new ThreadLocal<>();
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         request.getHeader("token");
         System.out.println("拦截器执行");
-        LogstInterceptor.threadLocal.set("a");
+        LogstInterceptor.THREADLOCAL.set("a");
         return true;
     }
 
@@ -29,6 +28,7 @@ public class LogstInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        THREADLOCAL.remove();
         System.out.println("视图返回");
     }
 }

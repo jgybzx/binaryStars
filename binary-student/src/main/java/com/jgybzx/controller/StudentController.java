@@ -1,21 +1,14 @@
 package com.jgybzx.controller;
 
 import com.jgybzx.JsonUtil;
-import com.jgybzx.aspect.LogAnnotation;
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.StudentService;
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
-import java.io.FileOutputStream;
+
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,7 +25,6 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    //@LogAnnotation
     @PostMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();

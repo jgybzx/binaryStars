@@ -17,7 +17,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.text.DateFormat;
 import java.util.*;
-
+/**
+ * @author jgybzx
+ * @date 2020/11/20 10:16
+ * @description  获取aop中的SQL语句，借鉴来源https://blog.csdn.net/sdzhangshulong/article/details/104393244
+ */
 public class SqlUtils {
 
     /**
@@ -29,7 +33,7 @@ public class SqlUtils {
      * @throws IllegalAccessException
      */
     public static String getMybatisSql(ProceedingJoinPoint pjp, SqlSessionFactory sqlSessionFactory) throws IllegalAccessException {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(16);
         //1.获取namespace+methdoName
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();
@@ -38,14 +42,15 @@ public class SqlUtils {
         //2.根据namespace+methdoName获取相对应的MappedStatement
         Configuration configuration = sqlSessionFactory.getConfiguration();
         MappedStatement mappedStatement = configuration.getMappedStatement(namespace + "." + methodName);
-//        //3.获取方法参数列表名
-//        Parameter[] parameters = method.getParameters();
-        //4.形参和实参的映射
-        Object[] objects = pjp.getArgs(); //获取实参
+        //3.获取方法参数列表名
+        Parameter[] parameters = method.getParameters();
+        //4.形参和实参的映射,获取实参
+        Object[] objects = pjp.getArgs();
         Annotation[][] parameterAnnotations = method.getParameterAnnotations();
         for (int i = 0; i < parameterAnnotations.length; i++) {
             Object object = objects[i];
-            if (parameterAnnotations[i].length == 0) { //说明该参数没有注解，此时该参数可能是实体类，也可能是Map，也可能只是单参数
+            //说明该参数没有注解，此时该参数可能是实体类，也可能是Map，也可能只是单参数
+            if (parameterAnnotations[i].length == 0) {
                 if (object.getClass().getClassLoader() == null && object instanceof Map) {
                     map.putAll((Map<? extends String, ?>) object);
                     System.out.println("该对象为Map");
@@ -131,7 +136,7 @@ public class SqlUtils {
      * @throws IllegalAccessException
      */
     private static Map<String, Object> objectToMap(Object obj) throws IllegalAccessException {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>(16);
         Class<?> clazz = obj.getClass();
         System.out.println(clazz);
         // 获取本类及其父类的属性，↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
