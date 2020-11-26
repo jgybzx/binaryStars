@@ -10,7 +10,7 @@ import java.util.Properties;
 /**
  * @author jgybzx
  * @date 2020/11/23 17:21
- * @description 获取数据库连接
+ * @description 获取数据库连接 （遗留问题，没有读取到配置文件里边的数据）
  */
 public class JdbcUtils {
     private static String url = "jdbc:mysql://127.0.0.1:3306/jgybzx?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useAffectedRows=true";
