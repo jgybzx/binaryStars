@@ -35,6 +35,11 @@ public class NewtouchController {
     @Autowired
     private RestTemplate restTemplate;
 
+    /**
+     * 远程调用 测试
+     * @param productNo
+     * @return
+     */
     @PostMapping("remotetest")
     public String queryAll(String productNo) {
         String url = "http://47.111.158.181:8022/n3s-propose-make/template/queryTemplate.json";
@@ -59,5 +64,17 @@ public class NewtouchController {
         }
         System.out.println(body);
         return body;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            System.out.println("i="+i);
+            for (int i1 = 0; i1 < 5; i1++) {
+                System.out.println("i12222222222222222="+i1);
+                if (i1==2){
+                    break;
+                }
+            }
+        }
     }
 }

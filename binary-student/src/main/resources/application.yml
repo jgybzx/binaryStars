@@ -28,5 +28,11 @@ eureka:
 mybatis:
   mapper-locations: classpath:mappers/**
 
+oss:
+  endpoint: https://oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI4FzgXRPq6ZSwmCBx7i2X
+  accessKeySecret: wnHzFjiXxVlij195jLK3StiQLLXro2
+  bucketName: binary-stars
+
 
 
