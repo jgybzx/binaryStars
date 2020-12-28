@@ -48,14 +48,17 @@ public class OssConfig {
         // 上传文件流。
         InputStream inputStream = new FileInputStream(tempFilePath);
         //ossClient.putObject(bucketName, objectName, inputStream);
+
+        // 以自定义的 HTTP头 格式上传
         ossClient.putObject(bucketName, objectName, inputStream, objectMetadata);
 
-        // 返回一个有时间的链接，
+        // 返回一个有时间的链接，（目前发现只能这样拿到返回连接，是否有其他方式待验证）
         Date expiration = new Date(System.currentTimeMillis() + 3600 * 1000);
         String url = ossClient.generatePresignedUrl(bucketName, objectName, expiration).toString();
 
         // 关闭OSSClient。
         ossClient.shutdown();
+        // 截取返回的链接
         return url.split("\\?")[0];
     }
 
