@@ -19,8 +19,9 @@ import org.springframework.web.client.RestTemplate;
 @MapperScan("com.jgybzx.mappers")
 @EnableTransactionManagement
 public class StuApplication {
-    @Bean //必须new 一个RestTemplate并放入spring容器当中,否则启动时报错
+    @Bean
     public RestTemplate restTemplate() {
+        //restTemplate 远程调用 必须new 一个RestTemplate并放入spring容器当中,否则启动时报错
         HttpComponentsClientHttpRequestFactory httpRequestFactory = new HttpComponentsClientHttpRequestFactory();
         httpRequestFactory.setConnectionRequestTimeout(30 * 1000);
         httpRequestFactory.setConnectTimeout(30 * 3000);

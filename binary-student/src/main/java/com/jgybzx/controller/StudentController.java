@@ -5,6 +5,7 @@ import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,10 +22,15 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("student")
 public class StudentController {
-
+    @Autowired
+    private StringRedisTemplate redisTemplate;
     @Autowired
     private StudentService studentService;
-
+    @PostMapping("testRedis")
+    public String testRedis() {
+        Object getMsfUserInfoUrl = redisTemplate.opsForHash().get("dictTools_hash_cache:public", "getMsfUserInfoUrl");
+        return JsonUtil.toJson("1");
+    }
     @PostMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();
@@ -63,16 +69,16 @@ public class StudentController {
     }
 
     @PostMapping("testTransaction")
-    public String testTransaction(){
+    public String testTransaction() {
         studentService.testTransaction();
         return "完成";
     }
 
     public static void main(String[] args) {
-        String s= "1.2.3";
+        String s = "1.2.3";
         String[] split = s.split("\\.");
         for (int i = 0; i < split.length; i++) {
-            System.out.println(split[i]+"asasd");
+            System.out.println(split[i] + "asasd");
         }
     }
 }

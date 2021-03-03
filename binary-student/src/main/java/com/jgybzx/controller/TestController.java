@@ -1,15 +1,9 @@
 package com.jgybzx.controller;
 
-import com.jgybzx.JsonUtil;
-import com.jgybzx.model.Student;
+import com.jgybzx.utils.Md5Util;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * @author jgybzx
@@ -24,22 +18,10 @@ public class TestController {
         return "success";
     }
 
-    public static void main(String[] args) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
-        List<Integer> list = new ArrayList<>();
-
-        list.add(12);
-        //这里直接添加会报错
-        //list.add("a");
-        Class<? extends List> clazz = list.getClass();
-        Method add = clazz.getDeclaredMethod("add", Object.class);
-        //但是通过反射添加，是可以的
-        add.invoke(list, "k");
-        Student student = new Student();
-        student.setAddress("121212");
-        add.invoke(list, student);
-        String s = JsonUtil.toJson(list.get(2));
-        System.out.println(s);
-        System.out.println(list);
-
+    public static void main(String[] args) {
+        String md5 = Md5Util.md5("P000000018495");
+        System.out.println(md5);
     }
+
+
 }

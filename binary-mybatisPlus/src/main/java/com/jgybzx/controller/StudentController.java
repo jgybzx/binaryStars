@@ -29,6 +29,11 @@ public class StudentController {
         studentList = studentList.stream().sorted(Comparator.comparing(Student::getBirthday)).collect(Collectors.toList());
         return JsonUtil.toJson(studentList);
     }
+    @PostMapping("test")
+    public String test() {
+        // int i = 1 / 0;
+        return "hello";
+    }
 
 }
 
