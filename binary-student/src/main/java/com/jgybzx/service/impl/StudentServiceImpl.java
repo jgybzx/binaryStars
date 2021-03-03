@@ -62,17 +62,22 @@ public class StudentServiceImpl implements StudentService {
     @Transactional(rollbackFor = Exception.class)
     public void testTransaction() {
         List<Student> list = new ArrayList<>();
-        Student student = new Student("2222", "1212", "1212", "1212", "1212", new Date());
+        Student student = new Student("2222", "1212", "1", "1212", "1212", new Date());
         list.add(student);
         mapper.saveAll(list);
         //int i = 1 / 0;
         list.clear();
-        Student student1 = new Student("3333", "1212", "1212", "1212", "1212", new Date());
+        Student student1 = new Student("3333", "1212", "1", "1212", "1212", new Date());
         list.add(student1);
         mapper.saveAll(list);
     }
 
-
+    /**
+     * 解析表格里边的数据，返回类型是 List<Map<String, Object>>
+     * @param file
+     * @return
+     * @throws IOException
+     */
     private List<Map<String, Object>> getDataList(MultipartFile file) throws IOException {
 
         // 文件流转换

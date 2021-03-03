@@ -41,7 +41,7 @@ public class StudentController {
 
     @SuppressWarnings("AlibabaRemoveCommentedCode")
     @PostMapping("queryByCondition")
-    public String queryByCondition(@RequestBody Map<String, Object> map) {
+    public Map<String,Object> queryByCondition(@RequestBody Map<String, Object> map) {
         StudentDto studentDto = JsonUtil.mapToClass(map, StudentDto.class);
        /* try {
             // 模拟服务器异常，访问超时
@@ -50,7 +50,10 @@ public class StudentController {
             e.printStackTrace();
         }*/
         List<Student> studentList = studentService.queryByCondition(studentDto);
-        return JsonUtil.toJson(studentList);
+        Map<String,Object> result = new HashMap<>(16);
+        result.put("studentList",studentList);
+        int i = 1/0;
+        return result;
         /**
          * {
          *   "id": "901",
