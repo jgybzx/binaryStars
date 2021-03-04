@@ -48,8 +48,6 @@ public class OssConfig {
         objectMetadata.setContentType(getContentType(fileName.substring(fileName.lastIndexOf("."))));
         // 上传文件流。
         InputStream inputStream = new FileInputStream(tempFilePath);
-        //ossClient.putObject(bucketName, objectName, inputStream);
-
         // 以自定义的 HTTP头 格式上传
         ossClient.putObject(bucketName, objectName, inputStream, objectMetadata);
 
@@ -69,40 +67,40 @@ public class OssConfig {
      * txt 格式经过测试，不需要转换 上传之后就是 text/plain。其他未测试
      * 已知  如果 Content-Type = .jpeg 访问地址会直接下载，本方法也是解决此问题
      *
-     * @param FilenameExtension
+     * @param fileSuffix
      * @return
      */
-    public static String getContentType(String FilenameExtension) {
-        if (FileSuffixEnum.BMP.getCode().equalsIgnoreCase(FilenameExtension)) {
+    public static String getContentType(String fileSuffix) {
+        if (FileSuffixEnum.BMP.getCode().equalsIgnoreCase(fileSuffix)) {
             return "image/bmp";
         }
-        if (FileSuffixEnum.GIF.getCode().equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.GIF.getCode().equalsIgnoreCase(fileSuffix)) {
             return "image/gif";
         }
-        if (FileSuffixEnum.JPEG.getCode().equalsIgnoreCase(FilenameExtension) ||
-                ".jpg".equalsIgnoreCase(FilenameExtension) ||
-                ".png".equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.JPEG.getCode().equalsIgnoreCase(fileSuffix) ||
+                ".jpg".equalsIgnoreCase(fileSuffix) ||
+                ".png".equalsIgnoreCase(fileSuffix)) {
             return "image/jpg";
         }
-        if (FileSuffixEnum.HTML.getCode().equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.HTML.getCode().equalsIgnoreCase(fileSuffix)) {
             return "text/html";
         }
 
-        if (FileSuffixEnum.TXT.getCode().equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.TXT.getCode().equalsIgnoreCase(fileSuffix)) {
             return "text/plain";
         }
-        if (FileSuffixEnum.VSD.getCode().equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.VSD.getCode().equalsIgnoreCase(fileSuffix)) {
             return "application/vnd.visio";
         }
-        if (FileSuffixEnum.PPTX.getCode().equalsIgnoreCase(FilenameExtension) ||
-                FileSuffixEnum.PPT.getCode().equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.PPTX.getCode().equalsIgnoreCase(fileSuffix) ||
+                FileSuffixEnum.PPT.getCode().equalsIgnoreCase(fileSuffix)) {
             return "application/vnd.ms-powerpoint";
         }
-        if (FileSuffixEnum.DOCX.getCode().equalsIgnoreCase(FilenameExtension) ||
-                FileSuffixEnum.DOC.getCode().equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.DOCX.getCode().equalsIgnoreCase(fileSuffix) ||
+                FileSuffixEnum.DOC.getCode().equalsIgnoreCase(fileSuffix)) {
             return "application/msword";
         }
-        if (FileSuffixEnum.XML.getCode().equalsIgnoreCase(FilenameExtension)) {
+        if (FileSuffixEnum.XML.getCode().equalsIgnoreCase(fileSuffix)) {
             return "text/xml";
         }
         return "image/jpg";

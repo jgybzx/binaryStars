@@ -25,7 +25,8 @@ public class MyRunnable implements Callable<Integer> {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
         MyRunnable myRunnable = new MyRunnable(10, 20);
-        for (int i = 0; i < 10; i++) {
+        int count = 10;
+        for (int i = 0; i < count; i++) {
             Future<Integer> submit = executorService.submit(myRunnable);
             System.out.println(submit.get());
         }

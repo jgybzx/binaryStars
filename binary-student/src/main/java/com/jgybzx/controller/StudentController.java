@@ -70,7 +70,8 @@ public class StudentController {
 
     @PostMapping("import")
     public String importData(@RequestParam("file") MultipartFile file) {
-        return studentService.importFile(file);
+        String rows = studentService.importFile(file);
+        return "上传成功，共"+rows+"条数据。";
     }
 
     @PostMapping("testTransaction")

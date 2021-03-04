@@ -10,17 +10,18 @@ import java.util.concurrent.Executors;
  */
 public class MyThread {
     public static void main(String[] args) {
-        for (int i1 = 0; i1 < 10; i1++) {
+        int count = 10;
+        for (int i1 = 0; i1 < count; i1++) {
             new Thread(() -> {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < count; i++) {
                     System.out.println(Thread.currentThread().getName() + "::::" + i);
                 }
             }).start();
         }
         ExecutorService executorService = Executors.newFixedThreadPool(10);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < count; i++) {
             executorService.submit(new Thread(() -> {
-                for (int i1 = 0; i1 < 10; i1++) {
+                for (int i1 = 0; i1 < count; i1++) {
                     System.out.println(Thread.currentThread().getName() + "::::" + i1);
                 }
             }));

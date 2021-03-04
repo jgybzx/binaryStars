@@ -34,13 +34,13 @@ public class Jgyb {
 
         String text = "jgybzx";
         // 获取公钥
-        RSAPublicKey rsaPubKey = RsaEncryptUtils.getRSAPubKey(pubKey);
+        RSAPublicKey rsaPubKey = RsaEncryptUtils.getRsaPubKey(pubKey);
         // 公钥加密
         String s = RsaEncryptUtils.encodeByPub(text, rsaPubKey);
         System.out.println("###########################");
         System.out.println(s);
         // 获取私钥
-        RSAPrivateKey rsaPriKey = RsaEncryptUtils.getRSAPriKey(priKey);
+        RSAPrivateKey rsaPriKey = RsaEncryptUtils.getRsaPriKey(priKey);
         // 私钥解密
         String s1 = RsaEncryptUtils.decodeByPri(s, rsaPriKey);
         System.out.println("###########################");

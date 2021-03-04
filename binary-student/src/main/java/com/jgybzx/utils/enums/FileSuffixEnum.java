@@ -20,9 +20,8 @@ public enum FileSuffixEnum {
     DOCX(".docx", ".docx"),
     DOC(".doc", ".doc"),
     XML(".xml ", ".xml ");
-    //文字描述
+
     private String desc;
-    //对应的代码
     private String code;
 
     FileSuffixEnum(String desc, String code) {

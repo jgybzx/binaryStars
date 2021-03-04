@@ -27,7 +27,6 @@ public class RemoteServiceImpl implements RemoteService {
     private RestTemplate restTemplate;
     @Autowired
     private DiscoveryClient discoveryClient;
-    @Qualifier("binary-student")
     @Autowired
     private StudentClient studentClient;
 

@@ -38,7 +38,7 @@ public class RsaEncryptUtils {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        Map<String, String> map = new HashMap<>();
+        Map<String, String> map = new HashMap<>(16);
         map.put("pub", Base64.getEncoder().encodeToString(rsaPublicKey.getEncoded()));
         map.put("pri", Base64.getEncoder().encodeToString(rsaPrivateKey.getEncoded()));
         return map;
@@ -50,7 +50,7 @@ public class RsaEncryptUtils {
      * @param key
      * @return
      */
-    public static RSAPublicKey getRSAPubKey(String key) {
+    public static RSAPublicKey getRsaPubKey(String key) {
         byte[] keyBytes;
         RSAPublicKey publicKey = null;
         try {
@@ -70,7 +70,7 @@ public class RsaEncryptUtils {
      * @param key
      * @return
      */
-    public static RSAPrivateKey getRSAPriKey(String key) {
+    public static RSAPrivateKey getRsaPriKey(String key) {
         byte[] keyBytes;
         RSAPrivateKey publicKey = null;
         try {
