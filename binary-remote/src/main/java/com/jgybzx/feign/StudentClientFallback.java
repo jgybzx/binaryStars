@@ -10,7 +10,7 @@ import java.util.Map;
  * @description feign的降级方法
  */
 @Component
-public class StudentClientFallback implements StudentClient  {
+public class StudentClientFallback implements StudentClient {
     @Override
     public String queryByCondition(Map<String, Object> map) {
         return "服务器访问超时*************";

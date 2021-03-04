@@ -11,12 +11,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @description
  */
 @SpringBootApplication
-
+@EnableFeignClients
 public class RemoteApplication {
-    /**
-     * @EnableEurekaClient
-     * @EnableFeignClients
-     */
     public static void main(String[] args) {
         SpringApplication.run(RemoteApplication.class, args);
     }

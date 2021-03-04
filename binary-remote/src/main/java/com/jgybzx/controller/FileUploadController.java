@@ -33,7 +33,7 @@ public class FileUploadController {
 
     private static void remove1(List<String> list) {
         for (String s : list) {
-            if ("3".equals(s)){
+            if ("3".equals(s)) {
                 list.remove(s);
             }
         }
