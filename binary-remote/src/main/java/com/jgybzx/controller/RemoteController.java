@@ -35,7 +35,6 @@ public class RemoteController {
         return remoteService.queryByCondition(map);
     }
 
-
     @PostMapping("config")
     public String productList() {
         List<String> productNo = productConfig.getProductNo();

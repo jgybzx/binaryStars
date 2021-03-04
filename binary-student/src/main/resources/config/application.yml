@@ -1,18 +1,18 @@
-server:
-  port: 8081
-
 spring:
-  application:
-    name: binary-student
   datasource:
+    #url: jdbc:mysql://127.0.0.1:3306/jgybzx?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useAffectedRows=true
     url: jdbc:mysql://127.0.0.1:3306/jgybzx?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useAffectedRows=true
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: root
   #配置项目热部署 spring.devtools.restart.enabled=true
   devtools:
     restart:
       enabled: true
+  redis:
+    host: 10.7.93.42
+    port: 45179
+
 eureka:
   client:
     service-url:
@@ -22,3 +22,14 @@ eureka:
     instance-id: ${spring.cloud.client.ip-address}:${server.port} #从spring获取ip
 mybatis:
   mapper-locations: classpath:mappers/**
+
+oss:
+  endpoint: https://oss-cn-beijing.aliyuncs.com
+  # f8e82172440e87a3f594c1a745b504ee
+  accessKeyId: LTAI4FzgXRPq6ZSwmCBx7i2X
+  # c9eb1f6489e1eccbace3f0f146e6686b
+  accessKeySecret: wnHzFjiXxVlij195jLK3StiQLLXro2
+  bucketName: binary-stars
+
+
+

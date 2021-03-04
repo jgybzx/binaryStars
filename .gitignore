@@ -1,0 +1,12 @@
+/binary-eureka/target/
+/binary-eureka/binary-eureka.iml
+/binary-model/target/
+/binary-model/binary-model.iml
+/binary-remote/target/
+/binary-remote/binary-remote.iml
+/binary-student/target/
+/binary-student/binary-student.iml
+/binary-zuul/target/
+/binary-zuul/binary-zuul.iml
+/binary-mybatisPlus/target/
+/binary-mybatisPlus/binary-mybatisPlus.iml

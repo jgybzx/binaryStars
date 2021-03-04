@@ -14,6 +14,7 @@ import java.util.List;
 public interface StudentService {
     /**
      * 查询全部
+     *
      * @return
      */
     List<Student> queryAll();
@@ -21,6 +22,7 @@ public interface StudentService {
 
     /**
      * 根据条件查询数据，动态参数
+     *
      * @param studentDto
      * @return
      */
@@ -28,8 +30,16 @@ public interface StudentService {
 
     /**
      * 读取表格数据 保存到表
+     *
      * @param file
      * @return
      */
-    String importFile(MultipartFile file) ;
+    String importFile(MultipartFile file);
+
+
+    /**
+     * 事务控制测试
+     */
+    void testTransaction();
+
 }

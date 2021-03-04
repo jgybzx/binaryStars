@@ -33,7 +33,7 @@ public class FileUploadImpl implements FileUploadService {
         // 文件后缀
         String suffixName = filename.substring(filename.lastIndexOf('.'));
         // 获取存储文件的路径
-        String filePath = this.getClass().getResource("").getPath()+"image/";
+        String filePath = this.getClass().getResource("").getPath() + "image/";
         // 获取当前时间，作为文件的名字
         String uploadFileName = String.valueOf(Calendar.getInstance().getTimeInMillis());
         Date date = new Date();

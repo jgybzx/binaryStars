@@ -6,7 +6,7 @@
 
     <groupId>com.jgybzx</groupId>
     <artifactId>binary-eureka</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>binary_eureka</name>
     <description>指两颗质量极其接近的星体，由于它们的万有引力十分接近，所以彼此吸引对方，互相绕着对方旋转不分离。</description>
 
@@ -41,4 +41,15 @@
             <version>0.0.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.jgybzx.EurekaApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

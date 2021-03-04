@@ -23,5 +23,4 @@ public class ProductConfig {
 
     private List<String> productNo;
 
-
 }

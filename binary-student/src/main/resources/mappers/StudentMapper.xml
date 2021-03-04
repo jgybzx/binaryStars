@@ -13,7 +13,7 @@
         <result column="birthday" property="birthday"></result>
     </resultMap>
     <!--int saveAll(List<Student> studentList);    -->
-    <insert id="saveAll" parameterType="java.util.List">
+    <insert id="saveAll" parameterType="java.util.ArrayList">
         insert into student (id,name,sex,department,address,birthday)
         values
         <foreach collection="list" item="student" index="index" separator=",">

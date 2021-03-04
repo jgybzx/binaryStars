@@ -1,0 +1,21 @@
+server:
+  port: 8083
+spring:
+  application:
+    name: binary-student
+  datasource:
+    #url: jdbc:mysql://127.0.0.1:3306/jgybzx?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useAffectedRows=true
+    url: jdbc:mysql://127.0.0.1:3306/jgybzx?useUnicode=true&characterEncoding=UTF8&useSSL=false&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useAffectedRows=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+  #配置项目热部署 spring.devtools.restart.enabled=true
+  devtools:
+    restart:
+      enabled: true
+logging:
+  level:
+    com.jgybzx.mapper: debug
+
+
+

@@ -4,6 +4,7 @@ import com.jgybzx.feign.StudentClient;
 import com.jgybzx.service.RemoteService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.Map;
  */
 @Service
 public class RemoteServiceImpl implements RemoteService {
+
     @Autowired
     private RestTemplate restTemplate;
     @Autowired

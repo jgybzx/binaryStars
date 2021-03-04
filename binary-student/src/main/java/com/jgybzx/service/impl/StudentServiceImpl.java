@@ -13,14 +13,12 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author jgybzx
@@ -31,6 +29,7 @@ import java.util.Map;
 public class StudentServiceImpl implements StudentService {
     @Autowired
     private StudentMapper mapper;
+
 
     @Override
     public List<Student> queryAll() {
@@ -43,6 +42,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public String importFile(MultipartFile file) {
         if (file.isEmpty()) {
             return "文件不为空";
@@ -58,6 +58,27 @@ public class StudentServiceImpl implements StudentService {
         return String.valueOf(rows);
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void testTransaction() {
+        List<Student> list = new ArrayList<>();
+        Student student = new Student("2222", "1212", "1", "1212", "1212", new Date());
+        list.add(student);
+        mapper.saveAll(list);
+        //int i = 1 / 0;
+        list.clear();
+        Student student1 = new Student("3333", "1212", "1", "1212", "1212", new Date());
+        list.add(student1);
+        mapper.saveAll(list);
+    }
+
+    /**
+     * 解析表格里边的数据，返回类型是 List<Map<String, Object>>
+     *
+     * @param file
+     * @return
+     * @throws IOException
+     */
     private List<Map<String, Object>> getDataList(MultipartFile file) throws IOException {
 
         // 文件流转换
@@ -123,4 +144,6 @@ public class StudentServiceImpl implements StudentService {
         }
         return dataList;
     }
+
+
 }

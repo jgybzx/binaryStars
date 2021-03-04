@@ -12,6 +12,7 @@ import java.io.IOException;
 public interface FileUploadService {
     /**
      * 文件上传
+     *
      * @param file
      * @return
      * @throws IOException
