@@ -25,10 +25,10 @@ public class BaseResponseBodyAdvice implements ResponseBodyAdvice {
         /**
          * String 类型 会报错，手动处理
          */
-        if (body instanceof String){
-            return JSON.toJSONString(ResultMessage.success("成功",body));
+        if (body instanceof String) {
+            return JSON.toJSONString(ResultMessage.success("成功", body));
         }
-        return ResultMessage.success("成功",body);
+        return ResultMessage.success("成功", body);
 
     }
 }

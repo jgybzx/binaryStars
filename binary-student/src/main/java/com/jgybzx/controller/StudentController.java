@@ -26,11 +26,13 @@ public class StudentController {
     private StringRedisTemplate redisTemplate;
     @Autowired
     private StudentService studentService;
+
     @PostMapping("testRedis")
     public String testRedis() {
         Object getMsfUserInfoUrl = redisTemplate.opsForHash().get("dictTools_hash_cache:public", "getMsfUserInfoUrl");
         return JsonUtil.toJson("1");
     }
+
     @PostMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();
@@ -41,7 +43,7 @@ public class StudentController {
 
     @SuppressWarnings("AlibabaRemoveCommentedCode")
     @PostMapping("queryByCondition")
-    public Map<String,Object> queryByCondition(@RequestBody Map<String, Object> map) {
+    public Map<String, Object> queryByCondition(@RequestBody Map<String, Object> map) {
         StudentDto studentDto = JsonUtil.mapToClass(map, StudentDto.class);
        /* try {
             // 模拟服务器异常，访问超时
@@ -50,9 +52,9 @@ public class StudentController {
             e.printStackTrace();
         }*/
         List<Student> studentList = studentService.queryByCondition(studentDto);
-        Map<String,Object> result = new HashMap<>(16);
-        result.put("studentList",studentList);
-        int i = 1/0;
+        Map<String, Object> result = new HashMap<>(16);
+        result.put("studentList", studentList);
+        int i = 1 / 0;
         return result;
         /**
          * {

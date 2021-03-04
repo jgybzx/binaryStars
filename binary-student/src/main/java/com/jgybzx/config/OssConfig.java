@@ -3,6 +3,7 @@ package com.jgybzx.config;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
 import com.aliyun.oss.model.ObjectMetadata;
+import com.jgybzx.utils.enums.FileSuffixEnum;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +18,8 @@ import java.util.Date;
  * @date 2020/12/21 15:40
  * @description 用于连接阿里 OSS 对象存储的必要条件
  * 注意点1、设置bucket 读写权限为公共读
- *      2、如果是使用新建的RAM进行操作，注意设置 Bucket 授权策略
- *      https://blog.csdn.net/JGYBZX_G/article/details/111480067
+ * 2、如果是使用新建的RAM进行操作，注意设置 Bucket 授权策略
+ * https://blog.csdn.net/JGYBZX_G/article/details/111480067
  */
 @Component
 @ConfigurationProperties(prefix = "oss")
@@ -44,7 +45,7 @@ public class OssConfig {
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         // 设置设置 HTTP 头 里边的 Content-Type
         ObjectMetadata objectMetadata = new ObjectMetadata();
-        objectMetadata.setContentType(getcontentType(fileName.substring(fileName.lastIndexOf("."))));
+        objectMetadata.setContentType(getContentType(fileName.substring(fileName.lastIndexOf("."))));
         // 上传文件流。
         InputStream inputStream = new FileInputStream(tempFilePath);
         //ossClient.putObject(bucketName, objectName, inputStream);
@@ -67,40 +68,41 @@ public class OssConfig {
      * 设置设置 HTTP 头 里边的 Content-Type
      * txt 格式经过测试，不需要转换 上传之后就是 text/plain。其他未测试
      * 已知  如果 Content-Type = .jpeg 访问地址会直接下载，本方法也是解决此问题
+     *
      * @param FilenameExtension
      * @return
      */
-    public static String getcontentType(String FilenameExtension) {
-        if (FilenameExtension.equalsIgnoreCase(".bmp")) {
+    public static String getContentType(String FilenameExtension) {
+        if (FileSuffixEnum.BMP.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "image/bmp";
         }
-        if (FilenameExtension.equalsIgnoreCase(".gif")) {
+        if (FileSuffixEnum.GIF.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "image/gif";
         }
-        if (FilenameExtension.equalsIgnoreCase(".jpeg") ||
-                FilenameExtension.equalsIgnoreCase(".jpg") ||
-                FilenameExtension.equalsIgnoreCase(".png")) {
+        if (FileSuffixEnum.JPEG.getCode().equalsIgnoreCase(FilenameExtension) ||
+                ".jpg".equalsIgnoreCase(FilenameExtension) ||
+                ".png".equalsIgnoreCase(FilenameExtension)) {
             return "image/jpg";
         }
-        if (FilenameExtension.equalsIgnoreCase(".html")) {
+        if (FileSuffixEnum.HTML.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "text/html";
         }
 
-        if (FilenameExtension.equalsIgnoreCase(".txt")) {
+        if (FileSuffixEnum.TXT.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "text/plain";
         }
-        if (FilenameExtension.equalsIgnoreCase(".vsd")) {
+        if (FileSuffixEnum.VSD.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "application/vnd.visio";
         }
-        if (FilenameExtension.equalsIgnoreCase(".pptx") ||
-                FilenameExtension.equalsIgnoreCase(".ppt")) {
+        if (FileSuffixEnum.PPTX.getCode().equalsIgnoreCase(FilenameExtension) ||
+                FileSuffixEnum.PPT.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "application/vnd.ms-powerpoint";
         }
-        if (FilenameExtension.equalsIgnoreCase(".docx") ||
-                FilenameExtension.equalsIgnoreCase(".doc")) {
+        if (FileSuffixEnum.DOCX.getCode().equalsIgnoreCase(FilenameExtension) ||
+                FileSuffixEnum.DOC.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "application/msword";
         }
-        if (FilenameExtension.equalsIgnoreCase(".xml")) {
+        if (FileSuffixEnum.XML.getCode().equalsIgnoreCase(FilenameExtension)) {
             return "text/xml";
         }
         return "image/jpg";

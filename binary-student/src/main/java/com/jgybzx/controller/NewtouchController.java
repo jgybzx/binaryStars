@@ -37,6 +37,7 @@ public class NewtouchController {
 
     /**
      * 远程调用 测试
+     *
      * @param productNo
      * @return
      */
@@ -68,10 +69,10 @@ public class NewtouchController {
 
     public static void main(String[] args) {
         for (int i = 0; i < 10; i++) {
-            System.out.println("i="+i);
+            System.out.println("i=" + i);
             for (int i1 = 0; i1 < 5; i1++) {
-                System.out.println("i12222222222222222="+i1);
-                if (i1==2){
+                System.out.println("i12222222222222222=" + i1);
+                if (i1 == 2) {
                     break;
                 }
             }

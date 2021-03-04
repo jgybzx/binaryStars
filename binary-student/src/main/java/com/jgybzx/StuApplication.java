@@ -28,6 +28,7 @@ public class StuApplication {
         httpRequestFactory.setReadTimeout(30 * 3000);
         return new RestTemplate(httpRequestFactory);
     }
+
     /**
      * @EnableEurekaClient
      */

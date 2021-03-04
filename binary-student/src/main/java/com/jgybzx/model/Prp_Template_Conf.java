@@ -4,76 +4,74 @@ package com.jgybzx.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 
+public class Prp_Template_Conf {
 
+    @JsonProperty("patch_memo")
+    private String patchMemo; //
 
-public class Prp_Template_Conf     {
+    @JsonProperty("template_name")
+    private String templateName; // 模版名称
 
-	@JsonProperty("patch_memo")
-	private String patchMemo; // 
+    @JsonProperty("template_state")
+    private String templateState; // 模版状态 01 有效 02 失效 03 停用
 
-	@JsonProperty("template_name")
-	private String templateName; // 模版名称
+    @JsonProperty("template_type")
+    private String templateType; // 模版类型 01 个人计划书 02 家庭计划书
 
-	@JsonProperty("template_state")
-	private String templateState; // 模版状态 01 有效 02 失效 03 停用
+    @JsonProperty("template_uuid")
+    private String templateUuid; // 模版UUID
 
-	@JsonProperty("template_type")
-	private String templateType; // 模版类型 01 个人计划书 02 家庭计划书
+    public Prp_Template_Conf() {
+    }
 
-	@JsonProperty("template_uuid")
-	private String templateUuid; // 模版UUID
+    public String getPatchMemo() {
+        return patchMemo;
+    }
 
-	public Prp_Template_Conf() {
-	}
+    public void setPatchMemo(String patchMemo) {
+        this.patchMemo = patchMemo;
+    }
 
-	public String getPatchMemo() {
-		return patchMemo;
-	}
+    public String getTemplateName() {
+        return templateName;
+    }
 
-	public void setPatchMemo(String patchMemo) {
-		this.patchMemo = patchMemo;
-	}
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
 
-	public String getTemplateName() {
-		return templateName;
-	}
+    public String getTemplateState() {
+        return templateState;
+    }
 
-	public void setTemplateName(String templateName) {
-		this.templateName = templateName;
-	}
+    public void setTemplateState(String templateState) {
+        this.templateState = templateState;
+    }
 
-	public String getTemplateState() {
-		return templateState;
-	}
+    public String getTemplateType() {
+        return templateType;
+    }
 
-	public void setTemplateState(String templateState) {
-		this.templateState = templateState;
-	}
+    public void setTemplateType(String templateType) {
+        this.templateType = templateType;
+    }
 
-	public String getTemplateType() {
-		return templateType;
-	}
+    public String getTemplateUuid() {
+        return templateUuid;
+    }
 
-	public void setTemplateType(String templateType) {
-		this.templateType = templateType;
-	}
+    public void setTemplateUuid(String templateUuid) {
+        this.templateUuid = templateUuid;
+    }
 
-	public String getTemplateUuid() {
-		return templateUuid;
-	}
-
-	public void setTemplateUuid(String templateUuid) {
-		this.templateUuid = templateUuid;
-	}
-
-	@Override
-	public String toString() {
-		return "Prp_Template_Conf{" +
-				"patchMemo='" + patchMemo + '\'' +
-				", templateName='" + templateName + '\'' +
-				", templateState='" + templateState + '\'' +
-				", templateType='" + templateType + '\'' +
-				", templateUuid='" + templateUuid + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Prp_Template_Conf{" +
+                "patchMemo='" + patchMemo + '\'' +
+                ", templateName='" + templateName + '\'' +
+                ", templateState='" + templateState + '\'' +
+                ", templateType='" + templateType + '\'' +
+                ", templateUuid='" + templateUuid + '\'' +
+                '}';
+    }
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class LogstInterceptor implements HandlerInterceptor {
     private static final ThreadLocal<Object> THREADLOCAL = new ThreadLocal<>();
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         request.getHeader("token");

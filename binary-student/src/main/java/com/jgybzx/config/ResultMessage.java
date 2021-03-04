@@ -1,7 +1,6 @@
 package com.jgybzx.config;
 
-import com.aliyun.oss.common.comm.ResponseMessage;
-import com.jgybzx.utils.ResultCodeEnum;
+import com.jgybzx.utils.enums.ResultCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

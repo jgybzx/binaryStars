@@ -1,4 +1,4 @@
-package com.jgybzx.utils;
+package com.jgybzx.utils.enums;
 
 /**
  * @author jgybzx

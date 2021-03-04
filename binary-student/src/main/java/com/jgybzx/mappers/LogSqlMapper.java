@@ -16,12 +16,14 @@ public interface LogSqlMapper {
 
     /**
      * 通过 model方式保存日志
+     *
      * @param logSql
      */
     void saveLogByModel(LogSql logSql);
 
     /**
      * 通过map方式保存日志
+     *
      * @param map
      */
     void saveLogByMap(@Param("map") Map<String, String> map);
