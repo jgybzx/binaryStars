@@ -30,6 +30,10 @@ oss:
   # c9eb1f6489e1eccbace3f0f146e6686b
   accessKeySecret: wnHzFjiXxVlij195jLK3StiQLLXro2
   bucketName: binary-stars
-
+##############################################################################
+filter:
+  #不需要过滤的请求
+  unFilterRequest:
+    request1: /student/queryAll.do
 
 
