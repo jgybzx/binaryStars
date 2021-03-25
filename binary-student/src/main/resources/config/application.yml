@@ -35,5 +35,9 @@ filter:
   #不需要过滤的请求
   unFilterRequest:
     request1: /student/queryAll.do
+jwt:
+  key: jgybzx
+  failureTime: 3600000
+
 
 

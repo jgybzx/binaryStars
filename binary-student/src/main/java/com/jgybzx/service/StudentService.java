@@ -5,6 +5,7 @@ import com.jgybzx.model.StudentDto;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author jgybzx
@@ -42,4 +43,5 @@ public interface StudentService {
      */
     void testTransaction();
 
+    String save(Map<String, Object> map);
 }

@@ -72,6 +72,15 @@ public class StudentServiceImpl implements StudentService {
         mapper.saveAll(list);
     }
 
+    @Override
+    public String save(Map<String, Object> map) {
+        Student student = JsonUtil.mapToClass(map, Student.class);
+        List<Student> list = new ArrayList<>();
+        list.add(student);
+        mapper.saveAll(list);
+        return "";
+    }
+
     /**
      * 解析表格里边的数据，返回类型是 List<Map<String, Object>>
      *
