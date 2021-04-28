@@ -5,6 +5,10 @@ import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.apache.commons.codec.binary.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -16,23 +20,25 @@ import java.util.*;
  * @author jgybzx
  * @date 2021/3/25 10:28
  */
+@Component()
+@ConfigurationProperties(prefix = "jwt")
 public class JwtUtils {
+    private static String key;
+    private static long failureTime;
 
     /**
-     * @param key         密钥
-     * @param subject     jet主体
-     * @param claims      创建payload的私有声明(根据特定的业务需要添加，如果要拿这个做验证，一般是需要和jwt的接收方提前沟通好验证方式的)
-     * @param failureTime 过期时间
+     * @param subject jet主体
+     * @param claims  创建payload的私有声明(根据特定的业务需要添加，如果要拿这个做验证，一般是需要和jwt的接收方提前沟通好验证方式的)
      * @return
      */
-    public static String createJwt(String key, String subject, Map<String, Object> claims, long failureTime) {
+    public static String createJwt(String subject, Map<String, Object> claims) {
 
         //指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         //生成JWT的时间
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
-        SecretKey secretKey = generalKey(key);
+        SecretKey secretKey = generalKey();
         //为payload添加各种标准声明和私有声明了
         JwtBuilder builder = Jwts.builder()
                 //如果有私有声明，一定要先设置这个自己创建的私有的声明，这个是给builder的claim赋值，一旦写在标准的声明赋值之后，就是覆盖了那些标准的声明的
@@ -59,9 +65,9 @@ public class JwtUtils {
      * @param token
      * @return
      */
-    public static Claims parseJwt(String token, String key) {
+    public static Claims parseJwt(String token) {
         return Jwts.parser()
-                .setSigningKey(generalKey(key))
+                .setSigningKey(generalKey())
                 .parseClaimsJws(token)
                 .getBody();
     }
@@ -71,28 +77,31 @@ public class JwtUtils {
      *
      * @return
      */
-    public static SecretKey generalKey(String jwtSecret) {
+    public static SecretKey generalKey() {
         //本地的密码解码
-        byte[] encodedKey = Base64.decodeBase64(jwtSecret);
+        byte[] encodedKey = Base64.decodeBase64(key);
         // 根据给定的字节数组使用AES加密算法构造一个密钥，使用 encodedKey中的始于且包含 0 到前 leng 个字节这是当然是所有。（后面的文章中马上回推出讲解Java加密和解密的一些算法）
-        SecretKey key = new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
-        return key;
+        return new SecretKeySpec(encodedKey, 0, encodedKey.length, "AES");
     }
+
+    private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
     public static void main(String[] args) {
         Random random = new Random();
         int randomInt = random.nextInt(1000000);
-        System.out.println("randomInt = " + randomInt);
+        logger.info("randomInt ={}", randomInt);
         Map<String, Object> claimsMap = new HashMap<>(16);
         claimsMap.put("id", "1");
         claimsMap.put("name", "jgybzxzxz");
-        String token = JwtUtils.createJwt("amd5Ynp4", "17501696526", claimsMap, 360000);
-        System.out.println("token = " + token);
-        Claims claims = JwtUtils.parseJwt(token, "amd5Ynp4");
-        System.out.println("claims.get(\"id\") = " + claims.get("id"));
-        System.out.println("claims.get(\"name\") = " + claims.get("name"));
-        System.out.println("claims.getId() = " + claims.getId());
-        System.out.println("claims.getSubject() = " + claims.getSubject());
+        String token = JwtUtils.createJwt("17501696526", claimsMap);
+        logger.info("token ={}", token);
+        Claims claims = JwtUtils.parseJwt(token);
+        logger.info("claims.get(\"id\") = {}", claims.get("id"));
+        logger.info("claims.get(\"name\") = {}", claims.get("name"));
+        logger.info("claims.getId() = {}", claims.getId());
+        logger.info("claims.getSubject() = {}", claims.getSubject());
 
     }
+
+
 }

@@ -10,8 +10,8 @@ spring:
     restart:
       enabled: true
   redis:
-    host: 10.7.93.42
-    port: 45179
+    host: 127.0.0.1
+    port: 6379
 
 eureka:
   client:

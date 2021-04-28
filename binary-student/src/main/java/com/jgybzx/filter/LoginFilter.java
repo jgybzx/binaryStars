@@ -2,7 +2,6 @@ package com.jgybzx.filter;
 
 import com.jgybzx.config.FilterRequestConfig;
 import org.springframework.beans.factory.BeanFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.*;
@@ -34,6 +33,7 @@ public class LoginFilter implements Filter {
                 return;
             }
         }
+        
         System.out.println("自定义过滤器filter1触发,拦截url:" + request.getRequestURI());
         filterChain.doFilter(servletRequest, servletResponse);
     }

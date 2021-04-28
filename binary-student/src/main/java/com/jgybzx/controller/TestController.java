@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author jgybzx
  * @date 2020/12/25 16:07
@@ -19,8 +22,7 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-        String md5 = Md5Util.md5("P000000018495");
-        System.out.println(md5);
+
     }
 
 

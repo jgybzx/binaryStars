@@ -33,6 +33,11 @@ public class StudentController {
         return JsonUtil.toJson("1");
     }
 
+    /**
+     * @return java.lang.String
+     * @author jgybzx
+     * @date 2021/4/28 10:12
+     */
     @PostMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();
@@ -41,7 +46,13 @@ public class StudentController {
         return JsonUtil.toJson(studentList);
     }
 
-    @SuppressWarnings("AlibabaRemoveCommentedCode")
+
+    /**
+     * @param map
+     * @return java.util.Map<java.lang.String, java.lang.Object>
+     * @author jgybzx
+     * @date 2021/4/28 10:06
+     */
     @PostMapping("queryByCondition")
     public Map<String, Object> queryByCondition(@RequestBody Map<String, Object> map) {
         StudentDto studentDto = JsonUtil.mapToClass(map, StudentDto.class);
@@ -71,7 +82,7 @@ public class StudentController {
     @PostMapping("import")
     public String importData(@RequestParam("file") MultipartFile file) {
         String rows = studentService.importFile(file);
-        return "上传成功，共"+rows+"条数据。";
+        return "上传成功，共" + rows + "条数据。";
     }
 
     @PostMapping("testTransaction")
