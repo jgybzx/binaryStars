@@ -1,5 +1,6 @@
 package com.jgybzx.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,13 +8,14 @@ import java.util.Date;
  * @date 2020/08/18 11:12
  * @description
  */
-public class Student  {
+public class Student implements Serializable {
+    private static final long serialVersionUID = -2635463306762451304L;
     private String id;
     private String name;
     private String sex;
     private String department;
     private String address;
-    private Date   birthday;
+    private Date birthday;
 
     public Student() {
     }

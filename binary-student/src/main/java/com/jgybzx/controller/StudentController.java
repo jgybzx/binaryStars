@@ -5,13 +5,13 @@ import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
-import java.util.*;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -23,15 +23,7 @@ import java.util.stream.Collectors;
 @RequestMapping("student")
 public class StudentController {
     @Autowired
-    private StringRedisTemplate redisTemplate;
-    @Autowired
     private StudentService studentService;
-
-    @PostMapping("testRedis")
-    public String testRedis() {
-        Object getMsfUserInfoUrl = redisTemplate.opsForHash().get("dictTools_hash_cache:public", "getMsfUserInfoUrl");
-        return JsonUtil.toJson("1");
-    }
 
     /**
      * @return java.lang.String
