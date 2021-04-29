@@ -9,6 +9,8 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * des: redis配置
+ * 储格式为<String, Object> 坑太多，建议还是使用 储格式为<String,String>
+ * 不仅存在存储在redis里边，不方便直观的查看，而且转换的时候也会有各种坑
  *
  * @author jgybzx
  * @date 2021/4/29 15:13
