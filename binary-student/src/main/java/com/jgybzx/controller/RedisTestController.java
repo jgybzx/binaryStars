@@ -1,7 +1,10 @@
 package com.jgybzx.controller;
 
+import com.jgybzx.JsonUtil;
 import com.jgybzx.model.Student;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +26,8 @@ import java.util.Map;
 public class RedisTestController {
     @Resource
     public RedisTemplate<String, Object> redisTemplate;
+    @Autowired
+    public StringRedisTemplate stringRedisTemplate;
 
     @PostMapping("get")
     public Map<String, Object> redisGet(@Param("key") String key) {
@@ -41,11 +46,18 @@ public class RedisTestController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        if (flag) {
-            return "缓存成功";
-        } else {
-            return "缓存失败";
-        }
+        return flag ? "缓存成功" : "缓存失败";
     }
 
+    @PostMapping("setObjectString")
+    public String setObjectString(@RequestBody Student student) {
+        boolean flag = false;
+        try {
+            stringRedisTemplate.opsForValue().set("studentString", JsonUtil.toJson(student));
+            flag = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flag ? "缓存成功" : "缓存失败";
+    }
 }

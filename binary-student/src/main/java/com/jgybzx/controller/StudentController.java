@@ -3,15 +3,17 @@ package com.jgybzx.controller;
 import com.jgybzx.JsonUtil;
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
+import com.jgybzx.model.TestModel;
 import com.jgybzx.service.StudentService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -33,7 +35,7 @@ public class StudentController {
     @PostMapping("queryAll")
     public String queryAll() {
         List<Student> studentList = studentService.queryAll();
-        // int i = 1 / 0;
+        int i = 1 / 0;
         studentList = studentList.stream().sorted(Comparator.comparing(Student::getBirthday)).collect(Collectors.toList());
         return JsonUtil.toJson(studentList);
     }
@@ -83,14 +85,37 @@ public class StudentController {
         return "完成";
     }
 
-    public static void main(String[] args) {
-
-        String s = "1.2.3";
-        String[] split = s.split("\\.");
-        for (int i = 0; i < split.length; i++) {
-            System.out.println(split[i] + "asasd");
-        }
+    public static void main(String[] args) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar nowTime = Calendar.getInstance();
+        nowTime.add(Calendar.DAY_OF_MONTH, 0);
+        Date time = dateFormat.parse(dateFormat.format(nowTime.getTime()));
+        Date temp = dateFormat.parse("2021-05-11");
+        // 下发日期小于 当前日期-10  temp - time  -1：小于  0；等于 1：大于
+        int i = temp.compareTo(time);
+        System.out.println("i = " + i);
+        List<TestModel> list = new ArrayList<>();
+        TestModel testModel = new TestModel();
+        testModel.setKey("1");
+        testModel.setValue("1");
+        list.add(testModel);
+        testModel = new TestModel();
+        testModel.setKey("2");
+        testModel.setValue("2");
+        list.add(testModel);
+        System.out.println("JsonUtil.toJson(list) = " + JsonUtil.toJson(list));
     }
+    //11       10 9 8 7 6 5 4 3 2 1
     // 分支冲突测试
 }
+
+
+
+
+
+
+
+
+
+
 
