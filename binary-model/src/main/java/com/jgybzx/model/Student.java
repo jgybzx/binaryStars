@@ -9,7 +9,6 @@ import java.util.Date;
  * @description
  */
 public class Student implements Serializable {
-    private static final long serialVersionUID = -2635463306762451304L;
     private String id;
     private String name;
     private String sex;

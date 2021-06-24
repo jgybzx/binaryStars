@@ -44,4 +44,6 @@ public interface StudentService {
     void testTransaction();
 
     String save(Map<String, Object> map);
+
+    String exportStu();
 }
