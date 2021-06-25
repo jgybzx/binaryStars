@@ -48,4 +48,6 @@ public interface StudentService {
     String save(Map<String, Object> map);
 
     XSSFWorkbook exportStu(List<Customer> customerList);
+
+    XSSFWorkbook exportStu2(List<Customer> customerList);
 }

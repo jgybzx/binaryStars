@@ -118,7 +118,8 @@ public class StudentController {
         response.setHeader("Content-Disposition", "attachment;filename=\"" + name + "\"");
         InputStream inputStream = null;
         OutputStream outputStream = null;
-        XSSFWorkbook workbook = studentService.exportStu(customerList);
+        // XSSFWorkbook workbook = studentService.exportStu(customerList);
+        XSSFWorkbook workbook = studentService.exportStu2(customerList);
         try {
             workbook.write(response.getOutputStream());
             response.getOutputStream().flush();

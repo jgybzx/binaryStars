@@ -128,6 +128,100 @@ public class StudentServiceImpl implements StudentService {
     }
 
     /**
+     * 以为是因为反射，浪费了时间，修改之后发现还是慢
+     *
+     * @param customerList
+     * @return org.apache.poi.xssf.usermodel.XSSFWorkbook
+     * @author jgybzx
+     * @date 2021/6/25 17:56
+     */
+
+    @Override
+    public XSSFWorkbook exportStu2(List<Customer> customerList) {
+        //创建工作簿
+        XSSFWorkbook xssfWorkbook = new XSSFWorkbook();
+        //创建工作表
+        XSSFSheet sheet = xssfWorkbook.createSheet();
+        xssfWorkbook.setSheetName(0, "学生信息表");
+        //创建表头
+        XSSFRow head = sheet.createRow(0);
+        CellStyle headCellStyle = setHeadCellStyle(xssfWorkbook);
+        // 获取对象所有属性
+        String[] attribute = {"序号", "客户号", "客户姓名", "客户概述", "客户联系电话", "咨询人姓名", "咨询人联系电话", "客户级别", "销售人员", "未跟踪天数", "末次跟踪日期", "沟通记录", "进度"};
+        for (int i = 0; i < attribute.length; i++) {
+            XSSFCell cell = head.createCell(i);
+            cell.setCellStyle(headCellStyle);
+            cell.setCellValue(attribute[i]);
+        }
+
+        // 填充数据（从第二行开始）
+        CellStyle cellStyle = setCellStyle(xssfWorkbook, true);
+        Customer customer;
+        for (int i = 1; i <= customerList.size(); i++) {
+            customer = customerList.get(i - 1);
+            XSSFRow row = sheet.createRow(i);
+            // 创建单元格 填充数据
+            for (int num = 0; num < 12; num++) {
+                sheet.autoSizeColumn((short) num);
+                XSSFCell cell = row.createCell(num);
+                String attributeValue = null;
+
+                cell.setCellStyle(cellStyle);
+                switch (num) {
+                    case 0:
+                        attributeValue = customer.getNumber();
+                        break;
+                    case 1:
+                        attributeValue = customer.getCustomerNo();
+                        break;
+                    case 2:
+                        attributeValue = customer.getCustomerName();
+                        break;
+                    case 3:
+                        attributeValue = customer.getCustomerDescription();
+                        break;
+                    case 4:
+                        attributeValue = customer.getCustomerPhone();
+                        break;
+                    case 5:
+                        attributeValue = customer.getConsultantName();
+                        break;
+                    case 6:
+                        attributeValue = customer.getConsultantPhone();
+                        break;
+                    case 7:
+                        attributeValue = customer.getCustomerLevel();
+                        break;
+                    case 8:
+                        attributeValue = customer.getAgentName();
+                        break;
+                    case 9:
+                        attributeValue = customer.getNoTrace();
+                        break;
+                    case 10:
+                        attributeValue = customer.getLastTraceDate();
+                        break;
+                    case 11:
+                        attributeValue = customer.getCommunicationRecord();
+                        sheet.setColumnWidth(11, 40 * 256);
+                        cell.setCellStyle(setCellStyle(xssfWorkbook, false));
+                        break;
+                    case 12:
+                        attributeValue = customer.getStatus();
+                        break;
+                    default:
+                        attributeValue = "";
+                        break;
+                }
+                attributeValue = attributeValue.replace("\\n", "<br>");
+                cell.setCellValue(attributeValue);
+
+            }
+        }
+        return xssfWorkbook;
+    }
+
+    /**
      * 设置表头单元格格式
      *
      * @param xssfWorkbook
