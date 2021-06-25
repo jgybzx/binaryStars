@@ -1,7 +1,9 @@
 package com.jgybzx.service;
 
+import com.jgybzx.model.Customer;
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -45,5 +47,5 @@ public interface StudentService {
 
     String save(Map<String, Object> map);
 
-    String exportStu();
+    XSSFWorkbook exportStu(List<Customer> customerList);
 }

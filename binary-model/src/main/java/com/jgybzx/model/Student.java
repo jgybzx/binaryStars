@@ -1,7 +1,6 @@
 package com.jgybzx.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author jgybzx
@@ -14,12 +13,12 @@ public class Student implements Serializable {
     private String sex;
     private String department;
     private String address;
-    private Date birthday;
+    private String birthday;
 
     public Student() {
     }
 
-    public Student(String id, String name, String sex, String department, String address, Date birthday) {
+    public Student(String id, String name, String sex, String department, String address, String birthday) {
         this.id = id;
         this.name = name;
         this.sex = sex;
@@ -68,11 +67,11 @@ public class Student implements Serializable {
         this.address = address;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

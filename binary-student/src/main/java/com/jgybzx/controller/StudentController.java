@@ -1,17 +1,21 @@
 package com.jgybzx.controller;
 
 import com.jgybzx.JsonUtil;
+import com.jgybzx.model.Customer;
 import com.jgybzx.model.Region;
 import com.jgybzx.model.Student;
 import com.jgybzx.model.StudentDto;
 import com.jgybzx.service.RegionService;
 import com.jgybzx.service.StudentService;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.util.*;
@@ -103,9 +107,9 @@ public class StudentController {
         return "上传成功，共" + rows + "条数据。";
     }
 
-    @GetMapping("export")
-    public void export(HttpServletResponse response) {
-        String name = "学生信息表.xlsx";
+    @PostMapping("export")
+    public void export(HttpServletResponse response, @RequestBody List<Customer> customerList) throws IOException {
+        String name = "人员信息表.xlsx";
         //避免文件名中文乱码，将UTF8打散重组成ISO-8859-1编码方式
         name = new String(name.getBytes(StandardCharsets.UTF_8), StandardCharsets.ISO_8859_1);
         // 设置响应头类型
@@ -114,43 +118,20 @@ public class StudentController {
         response.setHeader("Content-Disposition", "attachment;filename=\"" + name + "\"");
         InputStream inputStream = null;
         OutputStream outputStream = null;
-        String downloadPath = studentService.exportStu();
-        //根据临时文件的路径创建File对象，FileInputStream读取时需要使用
-        File file = new File(downloadPath);
+        XSSFWorkbook workbook = studentService.exportStu(customerList);
         try {
-            //通过FileInputStream读临时文件，ServletOutputStream将临时文件写给浏览器
-            inputStream = new FileInputStream(file);
-            outputStream = response.getOutputStream();
-            int len = -1;
-            byte[] b = new byte[1024];
-            while ((len = inputStream.read(b)) != -1) {
-                outputStream.write(b);
-            }
-            //刷新
-            outputStream.flush();
-
-        } catch (Exception e) {
+            workbook.write(response.getOutputStream());
+            response.getOutputStream().flush();
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            //关闭输入输出流
-            try {
-                if (inputStream != null) {
-                    inputStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (workbook != null) {
+                workbook.close();
             }
-            try {
-                if (outputStream != null) {
-                    outputStream.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+            if (response.getOutputStream() != null) {
+                response.getOutputStream().close();
             }
-
         }
-        //最后才能，删除临时文件，如果流在使用临时文件，file.delete()是删除不了的
-        file.delete();
     }
 
     @PostMapping("testTransaction")
@@ -181,6 +162,8 @@ public class StudentController {
     }
     //11       10 9 8 7 6 5 4 3 2 1
     // 分支冲突测试
+
+
 }
 
 
