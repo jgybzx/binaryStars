@@ -44,6 +44,7 @@ public class Customer {
     private String noTrace;
     @ExcelProperty("末次跟踪日期")
     private String lastTraceDate;
+
     @ExcelProperty("沟通记录")
     private String communicationRecord;
     @ExcelProperty("进度")

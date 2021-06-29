@@ -6,6 +6,7 @@ import com.alibaba.excel.write.style.HorizontalCellStyleStrategy;
 import com.alibaba.excel.write.style.column.LongestMatchColumnWidthStyleStrategy;
 import com.jgybzx.interceptor.CustomHandler;
 import com.jgybzx.model.Customer;
+import com.jgybzx.utils.EasyExcelUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,19 +55,19 @@ public class ExcelDownloadController {
         response.setHeader("Content-disposition", "attachment;filename*=utf-8''" + fileName + ".xlsx");
 
         // 标题样式
-        WriteCellStyle headWriteCellStyle = CustomHandler.getHeadStyle();
+        WriteCellStyle headWriteCellStyle = EasyExcelUtils.getHeadStyle();
 
         // 内容样式
-        WriteCellStyle contentWriteCellStyle = CustomHandler.getContentStyle();
+        WriteCellStyle contentWriteCellStyle = EasyExcelUtils.getContentStyle();
 
         // 这个策略是 头是头的样式 内容是内容的样式 其他的策略可以自己实现
         HorizontalCellStyleStrategy horizontalCellStyleStrategy =
                 new HorizontalCellStyleStrategy(headWriteCellStyle, contentWriteCellStyle);
-
+        CustomHandler customHandler = new CustomHandler(headWriteCellStyle, contentWriteCellStyle);
         //  write(response.getOutputStream(), Customer.class).registerWriteHandler(new CustomHandler()).sheet("模板").doWrite(customerList);
         write(response.getOutputStream(), Customer.class)
                 .registerWriteHandler(new LongestMatchColumnWidthStyleStrategy())
-                .registerWriteHandler(horizontalCellStyleStrategy)
+                .registerWriteHandler(customHandler)
                 .sheet("信息").doWrite(customerList);
 
     }
