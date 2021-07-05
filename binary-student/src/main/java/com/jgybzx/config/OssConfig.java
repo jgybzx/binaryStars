@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 import java.util.Date;
 
 /**
@@ -42,6 +44,8 @@ public class OssConfig {
         String transformDate = simpleDateFormat.format(new Date());
         String objectName = transformDate + "/" + System.currentTimeMillis() + "_" + fileName;
         // 创建OSSClient实例。
+        accessKeyId = new String(Base64.getDecoder().decode(accessKeyId.getBytes(StandardCharsets.UTF_8)));
+        accessKeySecret = new String(Base64.getDecoder().decode(accessKeySecret.getBytes(StandardCharsets.UTF_8)));
         OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
         // 设置设置 HTTP 头 里边的 Content-Type
         ObjectMetadata objectMetadata = new ObjectMetadata();

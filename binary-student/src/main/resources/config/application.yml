@@ -12,6 +12,10 @@ spring:
   redis:
     host: 127.0.0.1
     port: 6379
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
 
 eureka:
   client:
@@ -25,7 +29,7 @@ mybatis:
 
 oss:
   endpoint: https://oss-cn-beijing.aliyuncs.com
-  # f8e82172440e87a3f594c1a745b504ee accessKeyId base64加密处理
+  # f8e82172440e87a3f594c1a745b504ee accessKeyId base64编码处理
   accessKeyId: TFRBSTRGemdYUlBxNlpTd21DQng3aTJY
   # c9eb1f6489e1eccbace3f0f146e6686b
   accessKeySecret: d25IekZqaVh4VmxpajE5NWpMSzNTdGlRTExYcm8y
@@ -38,6 +42,8 @@ filter:
 jwt:
   key: jgybzx
   failureTime: 3600000
+
+
 
 
 
