@@ -25,10 +25,10 @@ mybatis:
 
 oss:
   endpoint: https://oss-cn-beijing.aliyuncs.com
-  # f8e82172440e87a3f594c1a745b504ee
-  accessKeyId: LTAI4FzgXRPq6ZSwmCBx7i2X
+  # f8e82172440e87a3f594c1a745b504ee accessKeyId base64加密处理
+  accessKeyId: TFRBSTRGemdYUlBxNlpTd21DQng3aTJY
   # c9eb1f6489e1eccbace3f0f146e6686b
-  accessKeySecret: wnHzFjiXxVlij195jLK3StiQLLXro2
+  accessKeySecret: d25IekZqaVh4VmxpajE5NWpMSzNTdGlRTExYcm8y
   bucketName: binary-stars
 ##############################################################################
 filter:
