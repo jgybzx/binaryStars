@@ -42,12 +42,12 @@ public class StudentController {
      */
     @PostMapping("queryAll")
     public String queryAll() {
-        List<Region> regions = regionService.queryAll();
+//        List<Region> regions = regionService.queryAll();
         String pCode = "0";
 
-        List<Map<String, Object>> extracted = extracted(regions, pCode);
+//        List<Map<String, Object>> extracted = extracted(regions, pCode);
         List<Student> studentList = studentService.queryAll();
-        int i = 1 / 0;
+//        int i = 1 / 0;
         studentList = studentList.stream().sorted(Comparator.comparing(Student::getBirthday)).collect(Collectors.toList());
         return JsonUtil.toJson(studentList);
     }
