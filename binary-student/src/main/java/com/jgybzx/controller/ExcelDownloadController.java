@@ -16,10 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.alibaba.excel.EasyExcelFactory.write;
 
@@ -74,4 +71,23 @@ public class ExcelDownloadController {
         }
     }
 
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            System.out.println("sc = ");
+            int i = sc.nextInt();
+            int frog = frog(i);
+            System.out.println(frog);
+        }
+    }
+
+    public static int frog(int i) {
+        if (i == 1) {
+            return 1;
+        } else if (i == 2) {
+            return 2;
+        } else {
+            return frog(i - 1) + frog(i - 2);
+        }
+    }
 }
