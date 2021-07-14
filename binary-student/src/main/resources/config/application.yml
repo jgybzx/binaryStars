@@ -35,6 +35,10 @@ oss:
   accessKeySecret: d25IekZqaVh4VmxpajE5NWpMSzNTdGlRTExYcm8y
   bucketName: binary-stars
 ##############################################################################
+sendsms:
+  accessKeyId: TFRBSTRHNTNCc3NjWVB5bTdZdTlwQmVw
+  accessKeySecret: NEtYb3Z6c0lmaGFsZEdiQ1p4b3lucFNpdUdZRFhW
+##############################################################################
 filter:
   #不需要过滤的请求
   unFilterRequest:

@@ -10,8 +10,11 @@ import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
+import org.bouncycastle.util.encoders.Base64;
+import org.springframework.context.annotation.Configuration;
 
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,10 +23,16 @@ import java.util.Map;
  * @date 2021/3/8 10:00
  * @description 阿里云 短信服务，短信发送工具类
  */
+@Configuration("sendsms")
 public class SendSmsUtil {
 
-    public static void sendSms(String code, String phone) {
-        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", "LTAI4G53BsscYPym7Yu9pBep", "4KXovzsIfhaldGbCZxoynpSiuGYDXV");
+    private String accessKeyId;
+    private String accessKeySecret;
+
+    public  void sendSms(String code, String phone) {
+        accessKeyId = new String(java.util.Base64.getDecoder().decode(accessKeyId.getBytes(StandardCharsets.UTF_8)));
+        accessKeySecret = new String(java.util.Base64.getDecoder().decode(accessKeySecret.getBytes(StandardCharsets.UTF_8)));
+        DefaultProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
         IAcsClient client = new DefaultAcsClient(profile);
         CommonRequest request = new CommonRequest();
         request.setSysMethod(MethodType.POST);
@@ -49,10 +58,5 @@ public class SendSmsUtil {
         }
     }
 
-    public static void main(String[] args) {
-        int random = (int) ((Math.random() * 9 + 1) * 100000);
-        //sendSms("", "13716636647");
 
-        sendSms("", "17501696526");
-    }
 }
