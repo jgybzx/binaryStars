@@ -1,0 +1,8 @@
+# RabbitMq 配置
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: jgybzx
+    password: jgybzx
+    virtual-host: jgybzx_test

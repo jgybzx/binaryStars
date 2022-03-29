@@ -1,0 +1,9 @@
+spring:
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    suffix: .html   # 默认html 可不配
+    prefix: classpath:/templates/ #配置模板路径，默认是templates，可以不用配置
+    encoding: UTF-8 #编码 可不用配置
+    servlet:
+      content-type: text/html #内容类别,可不用配置

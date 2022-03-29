@@ -1,0 +1,10 @@
+/binary-eureka/target/
+/binary-model/target/
+/binary-remote/target/
+/binary-student/target/
+/binary-zuul/target/
+/binary-mybatisPlus/target/
+/.idea/
+/rabbitmq-consumer/target/
+/rabbitmq-provider/target/
+*.iml

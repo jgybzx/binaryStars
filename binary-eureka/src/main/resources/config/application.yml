@@ -1,0 +1,10 @@
+eureka:
+  client:
+    registerWithEureka: false
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+    # 注册中心职责是维护服务实例，false：不检索服务。
+    fetch-registry: false
+  instance:
+    prefer-ip-address: true #显示ip
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #从spring获取ip

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>thyme leaf 简单使用</title>
+</head>
+<body>
+<h1> 简单取值</h1>
+<p>当前登录用户：<span th:text="${name}"></span></p>
+<hr>
+<h1> 简单取值 utext 识别html标签</h1>
+<p>th:text 当前登录用户：<span th:text="${name2}"></span></p>
+<p>th:utext 当前登录用户：<span th:utext="${name2}"></span></p>
+<hr>
+<h1> 自定义实体类 </h1>
+<p> name <span th:text="${user.name}"></span></p>
+<p> age <span th:text="${user.age}"></span></p>
+<p> toy <span th:text="${user.toy}"></span></p>
+<p> toy.toyName <span th:text="${user.toy.toyName}"></span></p>
+<p> toy.price <span th:text="${user.toy.price}"></span></p>
+<hr>
+<h1> 自定义实体类 th:object 标签使用 1</h1>
+<span th:object="${user}">
+    <p> name <span th:text="*{name}"></span></p>
+    <p> age <span th:text="*{age}"></span></p>
+    <p> toy <span th:text="*{toy}"></span></p>
+    <p> toy.toyName <span th:text="*{toy.toyName}"></span></p>
+    <p> toy.price <span th:text="*{toy.price}"></span></p>
+</span>
+<hr>
+<h1> 自定义实体类 th:object 标签使用 2</h1>
+<span th:object="${user}">
+    <p> name <span th:text="*{name}"></span></p>
+    <p> age <span th:text="*{age}"></span></p>
+    <p> toy <span th:text="*{toy}"></span></p>
+    <span th:object="${user.toy}">
+        <p> toy.toyName <span th:text="*{toyName}"></span></p>
+        <p> toy.price <span th:text="*{price}"></span></p>
+    </span>
+</span>
+<hr>
+<h1>方法调用 字符串的split方法</h1>
+<p> Jack,Tom :<span th:text="*{name.split(',')[0]}"></span></p>
+<p> Jack,Tom :<span th:text="*{name.split(',')[1]}"></span></p>
+<hr>
+<h1>#dates 全局对象处理日期</h1>
+<span>当前日期: <p th:text="${#dates.format(today,'yyyy-MM-dd')}"></p></span>
+<hr>
+<h1>字面值，'' 单引号包括，会被解析成字符</h1>
+<p> '2+1' 带单引号会被解析为： <span th:text="'2+1'"></span></p>
+<p> 2+1 不带单引号会被解析为： <span th:text="2+1"></span></p>
+<hr>
+<h1>字符串与变量值拼接</h1>
+<span> 使用 + 拼接 'th:text="'姓名：'+${user.name}+' 年龄：'+${user.age}' <p th:text="'姓名：'+${user.name}+' 年龄：'+${user.age}"></p></span>
+<span> 使用一对 | 拼接 'th:text="|姓名:${user.name} 年龄:${user.age}| '<p th:text="|姓名:${user.name} 年龄:${user.age}|"></p></span>
+<hr>
+<h1>运算</h1>
+<span> 算数运算 + - * / %<br>
+    10 + 2 =<span th:text="${user.age}+2"></span><br>
+    10 - 2 =<span th:text="${user.age}-2"></span><br>
+    10 * 2 =<span th:text="${user.age}*2"></span><br>
+    10 / 2 =<span th:text="${user.age}/2"></span><br>
+    10 % 2 =<span th:text="${user.age}%2"></span>
+</span>
+<br>
+<span> 比较运算 >,<,>=,<=,==,!=。xml会解析标签，所以<,> 也可以使用别名<br>
+    可以使用的别名：gt (>), lt (<), ge (>=), le (<=), not (!). Also eq (==), neq/ne (!=).<br>
+    10>1:   <span th:text="${user.age}>1"></span><br>
+    10>1:   <span th:text="${user.age} gt 1"></span><br>
+</span>
+<span> 条件运算<br>
+    三元运算：年龄为：<span th:text="${user.age}">岁,</span><span th:text="${user.age}>12 ? '大于12':'小于12'"></span><br>
+    ?: 用于默认值赋值：<span th:text="${user.address}?:'值为空，赋默认值'"></span>
+</span>
+<hr>
+<h1> 循环 th:each</h1>
+玩具列表 表格
+<table border="1" cellspacing="0">
+    <tr>
+        <th>名字</th>
+        <th>价格</th>
+    </tr>
+    <tr th:each="toy : ${toyList}">
+        <td align="center" width="56" th:text="${toy.toyName}"></td>
+        <td align="center" th:text="${toy.price}"></td>
+    </tr>
+</table>
+<br>
+玩具名字: <span th:each="toy:${toyList}">  <span th:text="${toy.toyName}+' '"></span> </span>
+<br>
+</body>
+</html>

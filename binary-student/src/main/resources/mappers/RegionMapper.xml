@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jgybzx.mappers.RegionMapper">
+
+    <resultMap id="userResultMap" type="com.jgybzx.entity.Region">
+        <id column="code" property="code"></id>
+        <result column="p_code" property="pCode"></result>
+        <result column="name" property="name"></result>
+
+    </resultMap>
+    <select id="queryAll" resultMap="userResultMap">
+        select *
+        from region ;
+    </select>
+</mapper>

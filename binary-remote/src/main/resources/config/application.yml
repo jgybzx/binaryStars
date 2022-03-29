@@ -1,0 +1,39 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: binary-remote
+  #配置项目热部署 spring.devtools.restart.enabled=true
+  devtools:
+    restart:
+      enabled: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #从spring获取ip
+
+#Feign内置Ribbon 配置，默认轮询
+user-server:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #随机
+feign:
+  hystrix:
+    enabled: false # 开启Feign的降级功能，而feign内置的熔断功能是自动
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true #开启Feign熔断
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000
+ribbon:
+  ReadTimeout: 3000 # 数据通信超时时长
+  ConnectTimeout: 500 # 连接超时时长
+#################################################分割线##################################################
+product:
+  productNo: 1,2,3,4,5

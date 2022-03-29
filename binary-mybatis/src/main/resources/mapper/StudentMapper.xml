@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jgybzx.mapper.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.jgybzx.model.Student">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sex" jdbcType="VARCHAR" property="sex"/>
+        <result column="department" jdbcType="VARCHAR" property="department"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="birthday" jdbcType="VARCHAR" property="birthday"/>
+        <result column="datetime_test" jdbcType="TIMESTAMP" property="datetimeTest"/>
+        <result column="test" jdbcType="DATE" property="test"/>
+        <association property="score" javaType="com.jgybzx.model.Score">
+            <id column="score_id" jdbcType="VARCHAR" property="scoreId"/>
+            <result column="student_id" jdbcType="VARCHAR" property="studentId"/>
+            <result column="math" jdbcType="INTEGER" property="math"/>
+            <result column="chinese" jdbcType="INTEGER" property="chinese"/>
+            <result column="english" jdbcType="INTEGER" property="english"/>
+            <result column="total_score" jdbcType="INTEGER" property="totalScore"/>
+        </association>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id
+        , name, sex, department, address, birthday, datetime_test, test
+    </sql>
+    <select id="selectByCondition" parameterType="com.jgybzx.model.Student" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        <where>
+            <if test="id !=null and id !=''">
+                and id = #{id}
+            </if>
+            <if test="name !=null and name !=''">
+                and name = #{name}
+            </if>
+            <if test="sex !=null and sex !=''">
+                and sex = #{sex}
+            </if>
+            <if test="department !=null and department !=''">
+                and department = #{department}
+            </if>
+            <if test="address !=null and address !=''">
+                /*https://blog.csdn.net/wrs120/article/details/82530653*/
+                <bind name="address" value="'%'+ address +'%'"/>
+                and address like #{address}
+            </if>
+        </where>
+    </select>
+    <select id="selectStudentAndScore" resultMap="BaseResultMap">
+        SELECT *
+        FROM student
+                 LEFT JOIN score ON student.id = score.student_id;
+    </select>
+    <select id="selectToMap" parameterType="int" resultType="java.util.Map">
+        SELECT stu.name,
+               stu.sex,
+               stu.department,
+               stu.address,
+               stu.birthday,
+               stu.datetime_test,
+               stu.test,
+               sc.total_score
+        FROM student stu
+                 LEFT JOIN score sc ON stu.id = sc.student_id
+        WHERE sc.total_score >= #{totalScore};
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+    </select>
+</mapper>

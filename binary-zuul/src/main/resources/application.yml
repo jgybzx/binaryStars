@@ -1,0 +1,18 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: binary-zuul
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10086/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port} #从spring获取ip
+
+# 配置项目路由
+zuul:
+  routes:
+    binary-student: /binary-student/**
+    binary-remote: /binary-remote/**
